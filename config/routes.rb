@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   get '/categories' => 'categories#index'
+  get '/categories/:id' => 'categories#show', as: :show_category
+  patch '/categories/:id' => 'categories#update', as: :edit_category
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
