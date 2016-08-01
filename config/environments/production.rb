@@ -76,4 +76,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
 end
+
+IMAGES_QUEUE_PATH = "/images_import/queue/"
+IMAGES_DONE_PATH = "/images_import/done/"
+WATERMARK_IMAGE = "/config/watermark.png"
+IMAGE_DIR = '/public/

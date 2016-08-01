@@ -38,4 +38,11 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+
 end
+
+IMAGES_QUEUE_PATH = "/images_import/queue/"
+IMAGES_DONE_PATH = "/images_import/done/"
+WATERMARK_IMAGE = "/config/watermark.png"
+IMAGE_DIR = '/public/'

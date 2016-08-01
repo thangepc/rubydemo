@@ -8,6 +8,7 @@
  
   
   <%= csrf_meta_tags %>
+  <meta id="authenticity_token" value="<%= form_authenticity_token %>">
 </head>
 <body>
 
@@ -67,5 +68,6 @@
     <%= javascript_include_tag 'bootstrap/js/bootstrap.min.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'bootstrap/js/holder.min.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'bootstrap/js/ie10-viewport-bug-workaround.js', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'admin/admin.js', 'data-turbolinks-track' => true %>
   </body>
 </html>

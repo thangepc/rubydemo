@@ -1,4 +1,21 @@
+<% if flash[:success] %>
+	<div class="notice"></div>
+	<div class="panel panel-default" >
+	  <div class="panel-body">
+	    <%= flash[:success] %>
+	  </div>
+	</div>
+<% end %>
+<% if flash[:error] %>
+	<div class="notice"></div>
+	<div class="panel panel-danger" >
+	  <div class="panel-body">
+	    <%= flash[:error] %>
+	  </div>
+	</div>
+<% end %>
 <h2 class="sub-header">List categories</h2>
+<%= link_to "Add new", create_category_path %>
 <div class="table-responsive">
 	<table class="table table-striped">
 		<thead>
@@ -22,10 +39,14 @@
 					<% end %>
 				</td>
 				<td>
-					<%= link_to "Edit", show_category_path(item) %>
+					<%= link_to "Edit", edit_category_path(item), class: "btn btn-success" %>
+					<%= link_to "Delete", delete_category_path(item), method: :delete,
+              data: { confirm: "Are you sure?", url: delete_category_path(item) }, class: "btn btn-danger delete-item" %>
+
 				</td>
 			</tr>
 			<% end %>
 		</tbody>
 	</table>
 </div>
+
