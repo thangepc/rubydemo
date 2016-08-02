@@ -8,4 +8,6 @@ class Category < ActiveRecord::Base
 	validates_uniqueness_of :title
 
 	mount_uploader :image, AttachmentUploader
+
+	self.per_page = 15
 end

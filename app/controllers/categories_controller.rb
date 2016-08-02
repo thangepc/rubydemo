@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
 	layout "admin"
 	def index
-		@categories = Category.all
+		@categories = Category.all.page(params[:page]).order(:title)
 	end
 
 	def create
@@ -28,15 +28,18 @@ class CategoriesController < ApplicationController
 		end
 	end
 
+	def list
+		# @categories = Category.all.page(params[:page]).order(:title)
+	end
+
 	def delete
 		@category = Category.find(params[:id])
 		if @category.destroy
-			template = ApplicationController.new.render_to_string(partial: '/categories/abc', locals: { variable: 'value' })
-			# template = render :partial => "/categories/abc", :locals => { :t => @category }
-			flash[:notice] = 'Successfully checked in'
-			render json: {status: 1, message: 'delete success', html: template} 
+			@categories = Category.all.page(params[:page]).order(:title)
+			template = render_to_string(:action => "list", :layout => false)
+			render json: {status: 1, message: 'Delete success', html: template} 
 		else
-			render json: {status: 0, message: 'delete error', link_redirect: '/categories'} 
+			render json: {status: 0, message: 'Delete error'} 
 		end
 	end
 

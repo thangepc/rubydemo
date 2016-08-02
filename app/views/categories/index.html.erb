@@ -1,22 +1,16 @@
-<% if flash[:success] %>
-	<div class="notice"></div>
-	<div class="panel panel-default" >
-	  <div class="panel-body">
-	    <%= flash[:success] %>
-	  </div>
+<div class="panel panel-success hide notice notice-success"  >
+	<div class="panel-body text-success">
+		
 	</div>
-<% end %>
-<% if flash[:error] %>
-	<div class="notice"></div>
-	<div class="panel panel-danger" >
-	  <div class="panel-body">
-	    <%= flash[:error] %>
-	  </div>
+</div>
+<div class="panel panel-danger hide notice notice-error" >
+	<div class="panel-body text-danger">
+		
 	</div>
-<% end %>
+</div>
 <h2 class="sub-header">List categories</h2>
 <%= link_to "Add new", create_category_path %>
-<div class="table-responsive">
+<div class="table-responsive" id="list-categories">
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -33,20 +27,19 @@
 				<td><%= item.title %></td>
 				<td>
 					<% if parent = Category.where(:id => item.parent_id).first %>
-						<%= parent.title %>
+					<%= parent.title %>
 					<% else %>
-						<%= '-' %>
+					<%= '-' %>
 					<% end %>
 				</td>
 				<td>
 					<%= link_to "Edit", edit_category_path(item), class: "btn btn-success" %>
 					<%= link_to "Delete", delete_category_path(item), method: :delete,
-              data: { confirm: "Are you sure?", url: delete_category_path(item) }, class: "btn btn-danger delete-item" %>
-
+					data: { confirm: "Are you sure?", url: delete_category_path(item) }, class: "btn btn-danger delete-item" %>
 				</td>
 			</tr>
 			<% end %>
+			
 		</tbody>
 	</table>
 </div>
-

@@ -15,7 +15,13 @@ $(document).ready(function() {
 					type: "POST",
 					url: url,
 					success: function (result) {
-						console.log(result)
+						$('.panel .notice').addClass('hide');
+						if(result.status == 1) {
+							$('#list-categories').html(result.html);
+							$('.notice-success .panel-body').text(result.message).parents('.notice-success').removeClass('hide').addClass('show');
+						} else {
+							$('.notice-error .panel-body').text(result.message).parents('.notice-error').removeClass('hide').addClass('show');
+						}
 					}
 				});
 			}
