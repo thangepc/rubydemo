@@ -45,6 +45,6 @@ class CategoriesController < ApplicationController
 
 	private
 		def category_params
-			params.require(:category).permit(:title, :image, :description)
+			params.require(:category).permit(:title, :image, :description, :parent_id)
 		end
 end
