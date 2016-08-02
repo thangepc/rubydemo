@@ -1,0 +1,53 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+vi:
+  hello: "Xin chao"
+  general:
+    btn-add-new: "Them moi" 
+    btn-delete: "Xoa"
+    btn-edit: "Sua"
+    btn-update: "Cap nhat"
+    btn-cancel: "Huy"
+    lbl-action: "Chuc nang"
+    lbl-confirm-delete: "Ban co muon xoa ban ghi nay?"
+    lbl-delete-success: "Xoa ban ghi thanh cong"
+    lbl-delete-dont-success: "Xoa ban ghi gap loi"
+    lbl-add-new-success: "Tao moi thanh cong"
+    lbl-add-new-dont-success: "Tao moi gap loi"
+    lbl-update-success: "Cap nhat thanh cong"
+    lbl-update-dont-success: "Cap nhat gap loi"
+  categories:
+    menu: "Danh muc"
+    heading-list: "Danh sach danh muc"
+    heading-add-new: "Them moi danh muc"
+    heading-update: "Cap nhat danh muc"
+    
+  products:
+    menu: "San pham"
+    heading-list: "Danh sach san pham"
+    heading-add-new: "Them moi san pham"
+    heading-update: "Cap nhat san pham"
+
+  languages:
+    lang: "Ngon ngu"
+    vi: "Tieng Viet"
+    en: "Tieng Anh"

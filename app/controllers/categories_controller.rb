@@ -1,29 +1,36 @@
 class CategoriesController < ApplicationController
+	before_action :require_user, only: [:index, :create, :edit]
 	layout "admin"
 	def index
+		@active = 'categories'
 		@categories = Category.all.page(params[:page]).order(:title)
 	end
 
 	def create
+		@active = 'categories'
 		if request.request_method() == 'POST'
 			@category = Category.new(category_params)
-			# Form isn't correctly filled message
 		     if @category.save
-		        flash[:notice] = "Dateien wurden hochgeladen und die Daten wurden gespeichert."
+		     	flash[:message_success] = t('general.lbl-add-new-success')
 				redirect_to '/categories'
-		     end
+			else
+				flash[:message_error] = t('general.lbl-add-new-dont-success')
+		    end
 		else
 			@category = Category.new
 		end
 	end
 
 	def edit
+		@active = 'categories'
 		@category = Category.find(params[:id])
 		if request.request_method == 'PATCH'
 			Rails.logger.info("Person attributes hash: #{category_params}")
-			# logger.debug "Person attributes hash: #{category_params}"
 			if @category.update_attributes(category_params)
+				flash[:message_success] = t('general.lbl-update-success')
 				redirect_to '/categories'
+			else
+				flash[:message_error] = t('general.lbl-update-dont-success')
 			end	
 		end
 	end
@@ -37,9 +44,9 @@ class CategoriesController < ApplicationController
 		if @category.destroy
 			@categories = Category.all.page(params[:page]).order(:title)
 			template = render_to_string(:action => "list", :layout => false)
-			render json: {status: 1, message: 'Delete success', html: template} 
+			render json: {status: 1, message: t('general.lbl-delete-success'), html: template} 
 		else
-			render json: {status: 0, message: 'Delete error'} 
+			render json: {status: 0, message: t('general.lbl-delete-dont-success')} 
 		end
 	end
 

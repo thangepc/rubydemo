@@ -1,0 +1,39 @@
+<%= render partial: "partials/message", locals: { account: @buyer } %>
+
+<h2 class="sub-header"><%= t('products.heading-list') %></h2>
+<%= link_to t('general.btn-add-new'), create_product_path, class: "btn btn-success" %>
+<div class="table-responsive" id="list-products">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Title</th>
+				<th>Model</th>
+				<th>Price</th>
+				<th><%= t('general.lbl-action') %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @products.each do |item| %>
+			<tr>
+				<td><%= item.id %></td>
+				<td><%= item.title %></td>
+				<td><%= item.model %></td>
+				<td><%= number_to_currency(item.price, locale: :en) %></td>
+				<td>
+					<%= link_to t('general.btn-edit'), edit_product_path(item), class: "btn btn-success" %>
+					<%= link_to t('general.btn-delete'), delete_product_path(item), method: :delete,
+					data: { confirm: t('general.lbl-confirm-delete'), url: delete_product_path(item), list: "#list-products" }, class: "btn btn-danger delete-item" %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="5">
+					<%= will_paginate @products %>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

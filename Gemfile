@@ -26,9 +26,12 @@ gem 'carrierwave'
 gem 'mini_magick', '~> 4.3'
 gem 'le'
 gem 'will_paginate', '~> 3.1.0'
+gem 'rails-i18n', '~> 4.0.0'
+gem 'geocoder'
+gem 'globalize', '~> 4.0.2'
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

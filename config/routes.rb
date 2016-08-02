@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
   get '/categories' => 'categories#index'
   # get '/categories/:id' => 'categories#show', as: :show_category
   # get '/categories/:id/edit' => 'categories#edit', as: :edit_category
@@ -7,6 +8,20 @@ Rails.application.routes.draw do
   match '/categories/create', to: 'categories#create', via: [:get, :post], as: :create_category
   match '/categories/:id', to: 'categories#edit', via: [:get, :patch], as: :edit_category
   post '/categories/:id' => 'categories#delete', as: :delete_category
+
+  get '/products' => 'products#index'
+  match '/products/create', to: 'products#create', via: [:get, :post], as: :create_product
+  match '/products/:id', to: 'products#edit', via: [:get, :patch], as: :edit_product
+  post '/products/:id' => 'products#delete', as: :delete_product
+
+  get '/signup' => 'admins#signup'
+  resources :admins
+
+  match '/login' => 'sessions#login', via: [:get, :post], as: :login
+  get '/logout' => 'sessions#logout'
+
+  match '/dashboard' => 'admins#dashboard', via: [:get, :post], as: :dashboard
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

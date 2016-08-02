@@ -21,3 +21,18 @@
 
 en:
   hello: "Hello world"
+  general:
+    btn-add-new: "Add new"
+    btn-delete: "Delete"
+    btn-edit: "Edit"
+    btn-update: "Update"
+  categories:
+    heading-list: "List Categories"
+    heading-add-new: "Add new category"
+    heading-update: "Update category"
+    
+  languages:
+    lang: "Language"
+    vi: "VietNammese"
+    en: "English"
+

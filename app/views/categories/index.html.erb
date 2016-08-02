@@ -1,15 +1,6 @@
-<div class="panel panel-success hide notice notice-success"  >
-	<div class="panel-body text-success">
-		
-	</div>
-</div>
-<div class="panel panel-danger hide notice notice-error" >
-	<div class="panel-body text-danger">
-		
-	</div>
-</div>
-<h2 class="sub-header">List categories</h2>
-<%= link_to "Add new", create_category_path %>
+<%= render partial: "partials/message", locals: { account: @buyer } %>
+<h2 class="sub-header"><%= t('categories.heading-list') %></h2>
+<%= link_to t('general.btn-add-new'), create_category_path, class: "btn btn-success" %>
 <div class="table-responsive" id="list-categories">
 	<table class="table table-striped">
 		<thead>
@@ -17,7 +8,7 @@
 				<th>#</th>
 				<th>Title</th>
 				<th>Parent</th>
-				<th>Action</th>
+				<th><%= t('general.lbl-action') %></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,13 +24,20 @@
 					<% end %>
 				</td>
 				<td>
-					<%= link_to "Edit", edit_category_path(item), class: "btn btn-success" %>
-					<%= link_to "Delete", delete_category_path(item), method: :delete,
-					data: { confirm: "Are you sure?", url: delete_category_path(item) }, class: "btn btn-danger delete-item" %>
+					<%= link_to t('general.btn-edit'), edit_category_path(item), class: "btn btn-success" %>
+					<%= link_to t('general.btn-delete'), delete_category_path(item), method: :delete,
+					data: { confirm: t('general.lbl-confirm-delete'), url: delete_category_path(item), list: "#list-categories" }, class: "btn btn-danger delete-item" %>
 				</td>
 			</tr>
 			<% end %>
 			
 		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4">
+					<%= will_paginate @categories %>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
 </div>

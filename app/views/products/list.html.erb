@@ -1,0 +1,33 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Title</th>
+			<th>Parent</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @products.each do |item| %>
+			<tr>
+				<td><%= item.id %></td>
+				<td><%= item.title %></td>
+				<td><%= item.model %></td>
+				<td><%= number_to_currency(item.price, locale: :en) %></td>
+				<td>
+					<%= link_to "Edit", edit_product_path(item), class: "btn btn-success" %>
+					<%= link_to "Delete", delete_product_path(item), method: :delete,
+					data: { confirm: t('general.lbl-confirm-delete'), url: delete_product_path(item), list: "#list-products" }, class: "btn btn-danger delete-item" %>
+				</td>
+			</tr>
+			<% end %>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="5">
+				<%= will_paginate @products %>
+			</td>
+		</tr>
+	</tfoot>
+	
+</table>
