@@ -47,6 +47,16 @@ vi:
     heading-add-new: "Them moi san pham"
     heading-update: "Cap nhat san pham"
 
+  login:
+    heading: "Vui long dang nhap"
+    lbl-email-address: "Dia chi email"
+    lbl-password: "Mat khau"
+    lbl-remember: "Remember me"
+    btn-signin: "Dang nhap"
+    lbl-message-login-faild: "Email hoac mat khau khong chinh xac"
+  logout:
+    lbl-message-logout-success: "Dang xuat thanh cong"
+
   languages:
     lang: "Ngon ngu"
     vi: "Tieng Viet"

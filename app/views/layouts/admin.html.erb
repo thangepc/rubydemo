@@ -6,10 +6,37 @@
   <%= stylesheet_link_tag    'bootstrap/css/ie10-viewport-bug-workaround.css', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'bootstrap/css/dashboard', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'admin/pagination', media: 'all', 'data-turbolinks-track' => true %>
- 
+  <!-- File Upload -->
+  <%= stylesheet_link_tag    'kartik-v-bootstrap-fileinput/css/fileinput.min.css', media: 'all', 'data-turbolinks-track' => true %>
+  <!-- Multi select -->
+  <%= stylesheet_link_tag    'multiselect/css/style.css', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'multiselect/lib/google-code-prettify/prettify.css', media: 'all', 'data-turbolinks-track' => true %>
+
+  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'bootstrap/js/bootstrap.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'bootstrap/js/holder.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'bootstrap/js/ie10-viewport-bug-workaround.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'kartik-v-bootstrap-fileinput/js/plugins/canvas-to-blob.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'kartik-v-bootstrap-fileinput/js/plugins/sortable.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'kartik-v-bootstrap-fileinput/js/plugins/purify.min.js', 'data-turbolinks-track' => true %>
+  
+  <%= javascript_include_tag 'kartik-v-bootstrap-fileinput/js/fileinput.min.js', 'data-turbolinks-track' => true %>
+
+  <!-- Multi select -->
+  <%= javascript_include_tag 'multiselect/js/multiselect.min.js', 'data-turbolinks-track' => true %>
   
   <%= csrf_meta_tags %>
   <meta id="authenticity_token" value="<%= form_authenticity_token %>">
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var authenticity_token = $('#authenticity_token').attr('value');
+      $.ajaxSetup({
+        data: {
+          authenticity_token: authenticity_token,
+        }
+      });
+    });
+  </script>
 </head>
 <body>
 
@@ -83,10 +110,7 @@
         </div>
       </div>
     </div>
-    <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'bootstrap/js/bootstrap.min.js', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'bootstrap/js/holder.min.js', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'bootstrap/js/ie10-viewport-bug-workaround.js', 'data-turbolinks-track' => true %>
+    
     <%= javascript_include_tag 'admin/admin.js', 'data-turbolinks-track' => true %>
   </body>
 </html>

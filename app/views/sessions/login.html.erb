@@ -1,5 +1,39 @@
-<%= form_for(:session, url: login_path) do |f| %> 
-  <%= f.email_field :email, :placeholder => "Email" %> 
-  <%= f.password_field :password, :placeholder => "Password" %> 
-  <%= f.submit "Log in", class: "btn-submit" %>
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="../../favicon.ico">
+		<title>Login Administrator</title>
+		
+		<%= stylesheet_link_tag    'bootstrap/css/bootstrap.min.css', media: 'all', 'data-turbolinks-track' => true %>
+		<%= stylesheet_link_tag    'bootstrap/css/ie10-viewport-bug-workaround.css', media: 'all', 'data-turbolinks-track' => true %>
+		<%= stylesheet_link_tag    'admin/signup.css', media: 'all', 'data-turbolinks-track' => true %>
+		
+		<%= javascript_include_tag 'bootstrap/js/ie-emulation-modes-warning.js', 'data-turbolinks-track' => true %>
+	</head>
+	<body>
+		<div class="container">
+			<%= form_for(:session, url: login_path, :html => {class: "form-signin"}) do |item| %>
+				<%= render partial: "partials/message", locals: { account: @buyer } %>
+				<h2 class="form-signin-heading"><%= t('login.heading') %></h2>
+				<%= item.label :email, class: "sr-only", for: "input-email" %>
+				<%= item.email_field :email, class: "form-control", id: "input-email", placeholder: t('login.lbl-email-address'), required: true, autofocus: true %>
+				<%= item.label :password, class: "sr-only", for: "input-password" %>
+				<%= item.password_field :password, class: "form-control", id: "input-password", placeholder: t('login.lbl-password'), required: true %>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="remember-me"> <%= t('login.lbl-remember') %>
+					</label>
+				</div>
+				<%= item.submit t('login.btn-signin'), class: "btn btn-lg btn-primary btn-block" %>
+			<% end %>
+		</div> <!-- /container -->
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<%= javascript_include_tag 'bootstrap/js/ie10-viewport-bug-workaround.js', 'data-turbolinks-track' => true %>
+	</body>
+</html>

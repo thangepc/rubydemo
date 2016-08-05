@@ -1,10 +1,4 @@
 $(document).ready(function() {
-	var authenticity_token = $('#authenticity_token').attr('value');
-	$.ajaxSetup({
-		data: {
-			authenticity_token: authenticity_token,
-		}
-	});
 	$('body').on('click','.delete-item', function (e) {
 		e.preventDefault();
 		var url = $(this).attr('data-url');
@@ -28,5 +22,16 @@ $(document).ready(function() {
 				});
 			}
 		}
+	});
+	$("#upload-files").fileinput({
+		uploadUrl: '/upload_files', // server upload action
+		uploadAsync: false,
+		showUpload: false,
+		showUploadedThumbs: false,
+		layoutTemplates: {
+		    actionUpload: ''
+		},
+		maxFileCount: 5,
+		uploadExtraData: {authenticity_token: $('#authenticity_token').attr('value')}
 	});
 });

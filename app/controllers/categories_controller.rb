@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+	include ApplicationHelper
 	before_action :require_user, only: [:index, :create, :edit]
 	layout "admin"
 	def index
@@ -9,8 +10,12 @@ class CategoriesController < ApplicationController
 	def create
 		@active = 'categories'
 		if request.request_method() == 'POST'
+
 			@category = Category.new(category_params)
 		     if @category.save
+				if params[:files]
+					upload_files(params[:files], @category, 'category')
+				end
 		     	flash[:message_success] = t('general.lbl-add-new-success')
 				redirect_to '/categories'
 			else
@@ -24,9 +29,15 @@ class CategoriesController < ApplicationController
 	def edit
 		@active = 'categories'
 		@category = Category.find(params[:id])
+		@images = Attachment.where('id_item = ? AND object = ?', params[:id], 'category').order(sort: :asc)
+		# upload_files
 		if request.request_method == 'PATCH'
+			# raise category_params.inspect
 			Rails.logger.info("Person attributes hash: #{category_params}")
 			if @category.update_attributes(category_params)
+				if params[:files]
+					upload_files(params[:files], @category, 'category')
+				end
 				flash[:message_success] = t('general.lbl-update-success')
 				redirect_to '/categories'
 			else

@@ -1,7 +1,6 @@
 <h2 class="sub-header"><%= t('products.heading-add-new') %></h2>
 <%= render partial: "partials/message", locals: { account: @buyer } %>
 <%= form_for @product, url: {action: "create"}, html: {class: "form-horizontal", multipart: true} do |item|  %>
-<form class="form-horizontal">
 <% if !flash[:notice].blank? %>
    <div class = "alert alert-info">
       <%= flash[:notice] %>
@@ -21,15 +20,54 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<%= item.label :image, for: "input-image-thumb", class: "col-sm-2 control-label" %>
+		<%= item.label :model, for: "input-model-thumb", class: "col-sm-2 control-label" %>
 		<div class="col-sm-10">
-			<%= item.text_area :image, class: "form-control", id: "input-image-thumb", row: "3" %>
+			<%= item.text_field :model, class: "form-control", id: "input-model-thumb" %>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= item.label :price, for: "input-price-thumb", class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<%= item.number_field :price, class: "form-control", id: "input-price-thumb" %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= item.label :category, for: "input-category", class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<div class="row">
+				<div class="col-xs-5">
+					<%= collection_select(:products, nil, Category.all, :id, :title, {prompt: nil}, { class: "multiselect form-control", size: "8", multiple: "multiple", "data-right": "#multiselect_to_1", "data-right-all": "#right_All_1", "data-right-selected": "#right_Selected_1", "data-left-all": "#left_All_1", "data-left-selected": "#left_Selected_1"}) %>
+					
+				</div>
+				<div class="col-xs-2">
+					<button type="button" id="right_All_1" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
+					<button type="button" id="right_Selected_1" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+					<button type="button" id="left_Selected_1" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+					<button type="button" id="left_All_1" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+				</div>
+				<div class="col-xs-5">
+				<select name="categories[]" id="multiselect_to_1" class="form-control" size="8" multiple="multiple"></select>
+			</div>
+			</div>
 		</div>
 	</div>
 	<div class="form-group">
 		<%= item.label :image, for: "input-image", class: "col-sm-2 control-label" %>
 		<div class="col-sm-10">
-			<%= file_field(:product, :image) %>
+    		<input id="upload-files" name="files[]" type="file" multiple=true class="file-loading">
+		</div>
+	</div>
+	<div class="form-group">
+		<%= item.label :description, for: "input-description-thumb", class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<%= item.text_area :description, class: "form-control", id: "input-description-thumb", row: "3" %>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= item.label :content, for: "input-content-thumb", class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<%= item.text_area :content, class: "form-control", id: "input-content-thumb", row: "5" %>
 		</div>
 	</div>
 	<div class="form-group">
@@ -37,5 +75,9 @@
 			<button type="submit" class="btn btn-default"><%= t('general.btn-add-new') %></button>
 		</div>
 	</div>
-</form>
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+    $('.multiselect').multiselect();
+    });
+    </script>
 <% end %>

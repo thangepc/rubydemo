@@ -1,6 +1,5 @@
 <h2 class="sub-header"><%= t('products.heading-update') %></h2>
 <%= form_for @product, url: {action: "edit"}, html: {class: "form-horizontal", multipart: true} do |item|  %>
-<form class="form-horizontal">
     <div class="form-group">
         <%= item.label :title, for: "input-title", class: "col-sm-2 control-label" %>
         <div class="col-sm-10">
@@ -21,15 +20,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label"></label>
-        <div class="col-sm-10">
-            <%= image_tag item.object.image.thumb.url %>
-        </div>
-    </div>
-    <div class="form-group">
         <%= item.label :image, for: "input-image", class: "col-sm-2 control-label" %>
         <div class="col-sm-10">
-            <%= file_field(:product, :image) %>
+            <input id="upload-files-edit" name="files[]" type="file" multiple=true class="file-loading">
         </div>
     </div>
     <div class="form-group">
@@ -38,5 +31,48 @@
             <%= link_to t('general.btn-cancel'), {controller: "products"}, class: "btn btn-danger" %>
         </div>
     </div>
-</form>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var previews = [];
+            var previewsConfig = [];
+            <% @images.each do |image| %>
+                previews.push("<%= image.data %>");
+                previewsConfig.push({caption: "<%= image.name %>", width: "120px", url: '/delete_file', key: <%= image.id %>})
+            <% end %>
+            $("#upload-files-edit").fileinput({
+                uploadUrl: '/upload_files', // server upload action
+                uploadAsync: false,
+                showUpload: false,
+                showUploadedThumbs: false,
+                layoutTemplates: {
+                    actionUpload: ''
+                },
+                maxFileCount: 5,
+                uploadExtraData: {authenticity_token: $('#authenticity_token').attr('value')},
+                initialPreview: previews,
+                initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
+                initialPreviewFileType: 'image', // image is the default and can be overridden in config below
+                initialPreviewConfig: previewsConfig,
+                purifyHtml: true,
+                overwriteInitial: false,
+            }).on('filedeleted', function(event) {
+                console.log("fileclear");
+            }).on('filesorted', function(event, params) {
+                // console.log('File sorted ', params.previewId, params.oldIndex, params.newIndex, params.stack);
+
+                var data = {};
+                $.each(params.stack, function(key, value) {
+                    data['sort[' + (key+1) + ']'] = value.key;
+                });
+                $.ajax({
+                    url: "/files_sort",
+                    type: "POST",
+                    data: data,
+                    success: function(result){
+                        console.log(result);
+                    }
+                })
+            });
+        });
+    </script>
 <% end %>

@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+	include ApplicationHelper
 	layout "admin"
 
 	def index
@@ -12,9 +13,21 @@ class ProductsController < ApplicationController
 
 	def create
 		@active = 'products'
+		@categories = Category.all
 		if request.request_method() == 'POST'
+			# render :text => params.inspect
+			# return
+
 			@product = Product.new(product_params)
-		     if @product.save
+		    if @product.save
+		    	if params[:categories] 
+		    		params[:categories].each { |category_id|
+		    			@product.product_categories.create(@product.id)
+		    		}
+		    	end
+		     	if params[:files]
+					upload_files(params[:files], @product, 'product')
+				end
 		     	flash[:message_success] = t('general.lbl-add-new-success')
 				redirect_to '/products'
 			else
@@ -29,9 +42,13 @@ class ProductsController < ApplicationController
 	def edit
 		@active = 'products'
 		@product = Product.find(params[:id])
+		@images = Attachment.where('id_item = ? AND object = ?', params[:id], 'product').order(sort: :asc)
 		if request.request_method == 'PATCH'
 			Rails.logger.info("Person attributes hash: #{product_params}")
 			if @product.update_attributes(product_params)
+				if params[:files]
+					upload_files(params[:files], @product, 'product')
+				end
 				flash[:message_success] = t('general.lbl-update-success')
 				redirect_to '/products'
 			else

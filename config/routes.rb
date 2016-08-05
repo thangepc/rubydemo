@@ -22,6 +22,11 @@ Rails.application.routes.draw do
 
   match '/dashboard' => 'admins#dashboard', via: [:get, :post], as: :dashboard
 
+  match '/upload_files' => 'settings#upload_files', via: [:get, :post], as: :upload_files
+  match '/delete_file' => 'settings#delete_file', via: [:get, :post], as: :delete_file
+  match '/files_sort' => 'settings#files_sort', via: [:get, :post], as: :files_sort
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
