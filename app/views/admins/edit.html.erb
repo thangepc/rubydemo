@@ -1,0 +1,76 @@
+<h2 class="sub-header"><%= t('admin.heading-update') %></h2>
+<%= form_for @admin, url: {action: "edit"}, html: {class: "form-horizontal"} do |item|  %>
+<% if !flash[:notice].blank? %>
+   <div class = "alert alert-info">
+      <%= flash[:notice] %>
+   </div>
+<% end %>
+    <div class="form-group">
+        <%= item.label :first_name, for: "input-first-name", class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+            <%= item.text_field :first_name, class: "form-control", id: "input-first-name", placeholder: "First name" %>
+            <% if @admin.errors.include?(:first_name)%>
+                <ul>
+                    <% @admin.errors.full_messages_for(:first_name).each do |err| %>
+                        <li><span id="helpBlock" class="text-danger"><%= err %></span></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= item.label :last_name, for: "input-last-name", class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+            <%= item.text_field :last_name, class: "form-control", id: "input-last-name", placeholder: "Last name" %>
+            <% if @admin.errors.include?(:last_name)%>
+                <ul>
+                    <% @admin.errors.full_messages_for(:last_name).each do |err| %>
+                        <li><span id="helpBlock" class="text-danger"><%= err %></span></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= item.label :email, for: "input-email", class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+            <%= item.email_field :email, class: "form-control", id: "input-email", placeholder: "Email" %>
+            <% if @admin.errors.include?(:email)%>
+                <ul>
+                    <% @admin.errors.full_messages_for(:email).each do |err| %>
+                        <li><span id="helpBlock" class="text-danger"><%= err %></span></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= item.label :password, for: "input-password", class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+            <%= item.password_field :password, class: "form-control", id: "input-password", placeholder: "Password" %>
+            <% if @admin.errors.include?(:password)%>
+                <ul>
+                    <% @admin.errors.full_messages_for(:password).each do |err| %>
+                        <li><span id="helpBlock" class="text-danger"><%= err %></span></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= item.label :status, for: "input-status", class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+            <%= item.check_box :status, class: "bootstrap-checkbox" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default"><%= t('general.btn-add-new') %></button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".bootstrap-checkbox").bootstrapSwitch({state: <%= @admin.status == 1 ? 'true' : 'false' %>});
+        });
+    </script>
+<% end %>

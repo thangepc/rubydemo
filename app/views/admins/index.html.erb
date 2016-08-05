@@ -1,0 +1,39 @@
+<%= render partial: "partials/message", locals: { account: @buyer } %>
+<h2 class="sub-header"><%= t('admin.heading-list') %></h2>
+<%= link_to t('general.btn-add-new'), create_admins_path, class: "btn btn-success" %>
+<div class="table-responsive" id="list-admin">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Email</th>
+				<th>Full name</th>
+				<th>Status</th>
+				<th><%= t('general.lbl-action') %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @users.each do |item| %>
+			<tr>
+				<td><%= item.id %></td>
+				<td><%= item.email %></td>
+				<td><%= item.first_name + ' ' + item.last_name %></td>
+				<td><input type="checkbox" name="my-checkbox" data-id="<%= item.id %>" data-url="/admins/change_status" <%= item.status == 1 ? 'checked' : '' %> ></td>
+				<td>
+					<%= link_to t('general.btn-edit'), edit_admins_path(item), class: "btn btn-success" %>
+					<%= link_to t('general.btn-delete'), delete_admins_path(item), method: :delete,
+					data: { confirm: t('general.lbl-confirm-delete'), url: delete_admins_path(item), list: "#list-admin" }, class: "btn btn-danger delete-item" %>
+				</td>
+			</tr>
+			<% end %>
+			
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4">
+					<%= will_paginate @users %>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

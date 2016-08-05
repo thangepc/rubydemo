@@ -1,27 +1,34 @@
 Rails.application.routes.draw do
 
   get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
+
+  # Category
   get '/categories' => 'categories#index'
-  # get '/categories/:id' => 'categories#show', as: :show_category
-  # get '/categories/:id/edit' => 'categories#edit', as: :edit_category
-  # patch '/categories/:id' => 'categories#update', as: :update_category
   match '/categories/create', to: 'categories#create', via: [:get, :post], as: :create_category
   match '/categories/:id', to: 'categories#edit', via: [:get, :patch], as: :edit_category
   post '/categories/:id' => 'categories#delete', as: :delete_category
 
+  # Products
   get '/products' => 'products#index'
   match '/products/create', to: 'products#create', via: [:get, :post], as: :create_product
   match '/products/:id', to: 'products#edit', via: [:get, :patch], as: :edit_product
   post '/products/:id' => 'products#delete', as: :delete_product
 
+  # Admin
   get '/signup' => 'admins#signup'
-  resources :admins
-
+  # resources :admins
   match '/login' => 'sessions#login', via: [:get, :post], as: :login
   get '/logout' => 'sessions#logout'
-
   match '/dashboard' => 'admins#dashboard', via: [:get, :post], as: :dashboard
+  get '/admins' => 'admins#index'
+  post '/admins/change_status', to: 'admins#change_status', as: :change_status_admins
+  match '/admins/create', to: 'admins#create', via: [:get, :post], as: :create_admins
+  match '/admins/:id', to: 'admins#edit', via: [:get, :patch], as: :edit_admins
+  post '/admins/:id', to: 'admins#delete', as: :delete_admins
 
+
+
+  # Upload file
   match '/upload_files' => 'settings#upload_files', via: [:get, :post], as: :upload_files
   match '/delete_file' => 'settings#delete_file', via: [:get, :post], as: :delete_file
   match '/files_sort' => 'settings#files_sort', via: [:get, :post], as: :files_sort

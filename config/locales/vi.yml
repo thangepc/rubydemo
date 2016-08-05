@@ -46,7 +46,11 @@ vi:
     heading-list: "Danh sach san pham"
     heading-add-new: "Them moi san pham"
     heading-update: "Cap nhat san pham"
-
+  admin:
+    menu: "Quan ly tai khoan admin"
+    heading-list: "Danh sach tai khoan Admin"
+    heading-add-new: "Them moi tai khoan"
+    heading-update: "Cap nhat tai khoan"
   login:
     heading: "Vui long dang nhap"
     lbl-email-address: "Dia chi email"

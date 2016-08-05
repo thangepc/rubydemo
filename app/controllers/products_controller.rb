@@ -21,9 +21,7 @@ class ProductsController < ApplicationController
 			@product = Product.new(product_params)
 		    if @product.save
 		    	if params[:categories] 
-		    		params[:categories].each { |category_id|
-		    			@product.product_categories.create(@product.id)
-		    		}
+		    		@product.product_categories << params[:categories].map{ |category| ProductCategory.new(:category_id => category.to_i)}
 		    	end
 		     	if params[:files]
 					upload_files(params[:files], @product, 'product')
@@ -42,10 +40,24 @@ class ProductsController < ApplicationController
 	def edit
 		@active = 'products'
 		@product = Product.find(params[:id])
+
+		@categoriesSelected = @product.product_categories
+		@listCategoriesSelected = []
+		@categoriesSelected.each { |cate|
+			@listCategoriesSelected << cate.category
+		}
+		# render :json => @listCategoriesSelected
+		# return
 		@images = Attachment.where('id_item = ? AND object = ?', params[:id], 'product').order(sort: :asc)
 		if request.request_method == 'PATCH'
 			Rails.logger.info("Person attributes hash: #{product_params}")
 			if @product.update_attributes(product_params)
+				# render :json => params.inspect
+				# return
+				if params[:categories] 
+					@product.product_categories.map { |category| category.destroy}
+		    		@product.product_categories << params[:categories].map{ |category| ProductCategory.new(:category_id => category.to_i)}
+		    	end
 				if params[:files]
 					upload_files(params[:files], @product, 'product')
 				end

@@ -12,6 +12,9 @@
   <%= stylesheet_link_tag    'multiselect/css/style.css', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'multiselect/lib/google-code-prettify/prettify.css', media: 'all', 'data-turbolinks-track' => true %>
 
+  <!-- Bootstrap switch -->
+  <%= stylesheet_link_tag    'bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css', media: 'all', 'data-turbolinks-track' => true %>
+
   <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'bootstrap/js/bootstrap.min.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'bootstrap/js/holder.min.js', 'data-turbolinks-track' => true %>
@@ -24,6 +27,10 @@
 
   <!-- Multi select -->
   <%= javascript_include_tag 'multiselect/js/multiselect.min.js', 'data-turbolinks-track' => true %>
+
+  <!-- Bootstrap switch -->
+  <%= javascript_include_tag 'bootstrap-switch/js/bootstrap-switch.min.js', 'data-turbolinks-track' => true %>
+
   
   <%= csrf_meta_tags %>
   <meta id="authenticity_token" value="<%= form_authenticity_token %>">
@@ -69,7 +76,7 @@
               </li>
             <% else %>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actions <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><%= link_to "Login", 'login' %></a></li>
                   <li><%= link_to "Signup", 'signup' %></a></li>
