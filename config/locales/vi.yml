@@ -65,3 +65,7 @@ vi:
     lang: "Ngon ngu"
     vi: "Tieng Viet"
     en: "Tieng Anh"
+
+  will_paginate:
+    previous_label: "<span aria-hidden='true'>&laquo;</span>"
+    next_label: "<span aria-hidden='true'>&raquo;</span>"

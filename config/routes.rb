@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  # Client
+  get '/' => 'client#index'
+
+
+
   get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
 
   # Category

@@ -1,12 +1,25 @@
 module ApplicationHelper
 	def full_title(page_title = '')
-    base_title = "Ruby on Rails Tutorial Sample App"
-    if page_title.empty?
-      base_title
-    else
-      page_title + " | " + base_title
-    end
-  end
+	    base_title = "Ruby on Rails Tutorial Sample App"
+	    if page_title.empty?
+	      	base_title
+	    else
+	      	page_title + " | " + base_title
+	    end
+	end
+
+	def trim(string = '', length)
+		defaultString = 'String empty'
+	    if string.empty?
+	      	defaultString
+	    else
+	    	if string.length < length
+	    		string
+	    	else
+	    		string.truncate(length, separator: ' ')
+	    	end
+	    end
+	end
 
 
   	def upload_files (files, item, object)
