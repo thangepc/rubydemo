@@ -2,9 +2,9 @@
 	@categories = Category.all
 %>
 
-<p class="lead">Shop Name</p>
+<p class="lead">Categories</p>
 <div class="list-group">
 	<% @categories.each do |item| %>
-		<a href="#" class="list-group-item"><%= item.title %></a>
+		<a href="<%= categories_path(item) %>" class="list-group-item"><%= item.title %></a>
 	<% end %>
 </div>

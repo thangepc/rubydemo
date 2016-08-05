@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   # Client
   get '/' => 'client#index'
-  get 'product/:id' => 'client#detail', as: :detail_product
+  get '/product/:id' => 'client#detail', as: :detail_product
+  get '/cate/:id' => 'client#categories', as: :categories
 
 
 

@@ -11,4 +11,12 @@ class ClientController < ApplicationController
 			@product = Product.find(params[:id])
 		end
 	end
+
+	def categories
+		if params[:id] != nil
+			@category = Category.find(params[:id])
+			@productCategory = ProductCategory.where(:category_id => params[:id])
+			@products = @productCategory
+		end
+	end
 end
