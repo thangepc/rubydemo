@@ -10,15 +10,26 @@ module ApplicationHelper
 
 	def trim(string = '', length)
 		defaultString = 'String empty'
-	    if string.empty?
+	    if string == nil || string.empty?
 	      	defaultString
 	    else
-	    	if string.length < length
+	    	if length == nil
 	    		string
-	    	else
+	    	elsif length != nil && string.length < length
+	    		string
+	    	else 
 	    		string.truncate(length, separator: ' ')
 	    	end
 	    end
+	end
+
+	def get_image(image)
+		defaultImage = 'http://placehold.it/320x150'
+		if image.empty?
+			defaultImage
+		else
+			ActionController::Base.relative_url_root.to_s + image
+		end
 	end
 
 

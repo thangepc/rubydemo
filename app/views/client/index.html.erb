@@ -30,12 +30,12 @@
     <% @products.each do |item| %>
     <div class="col-sm-4 col-lg-4 col-md-4">
         <div class="thumbnail">
-            <img src="http://placehold.it/320x150" alt="">
+            <img src="<%= get_image(item.get_image_default) %>" alt="">
             <div class="caption">
-                <h4 class="pull-right"><%= number_to_currency(item.price, precision: 0, unit: "d") %></h4>
-                <h4><a href="#"><%= trim(item.title, 30) %></a>
+                <h4 class="pull-right"><%= item.get_price %></h4>
+                <h4><a href="<%= detail_product_path(item) %>"><%= item.get_title(30) %></a>
                 </h4>
-                <p><%= trim('See more snippets like this online store item at', 50) %></p>
+                <p><%= item.get_description(50) %></p>
             </div>
             <div class="ratings">
                 <p class="pull-right">15 reviews</p>
