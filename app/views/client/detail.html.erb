@@ -6,6 +6,27 @@
         </h4>
         <p><%= @product.get_description %></p>
     </div>
+    <div class="row">
+        <div class="buy-now pull-right" style="margin-right: 20px;">
+            <form class="form-inline" method="POST" action="<%= buynow_path()%>">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="product_id" value="<%= @product.id %>">
+                <div class="form-group">
+                    <label for="input-quantity">So luong</label>
+                    <select name="quantity" id="input-quantity">
+                        <% (1..10).each do |i| %>
+                            <option value="<%= i %>"><%= i %></option>
+                        <% end %>
+                    </select>
+                </div>
+                <% if current_client %>
+                    <button type="submit" class="btn btn-success">Mua hang</button>
+                <% else %>
+                    <a href="<%= signin_path() %>" class="btn btn-success">Mua hang</a>
+                <% end %>
+            </form>
+        </div>
+    </div>
     <div class="ratings">
         <p class="pull-right"><%= @product.comments.count %> reviews</p>
         <p>
@@ -18,15 +39,13 @@
     <div class="row" style="margin: 10px 0px;">
         <div class="text-right">
             <% if current_client %>
-                <a id="btn-show-comment" data-url="<%= request.fullpath %>" class="btn btn-success">Leave a Review</a>
+            <a id="btn-show-comment" data-url="<%= request.fullpath %>" class="btn btn-success">Leave a Review</a>
             <% else %>
-                <a href="<%= signin_path() %>" class="btn btn-success">Leave a Review</a>
+            <a href="<%= signin_path() %>" class="btn btn-success">Leave a Review</a>
             <% end %>
-
         </div>
     </div>
     <div class="row" >
-
         <form method="POST" role="form" data-toggle="validator" class="form-horizontal hide" id="frmComment" action="<%= post_comment_path()%>">
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <input type="hidden" name="product_id" value="<%= @product.id %>">
@@ -54,60 +73,59 @@
     </div>
     <hr>
     <% if @product.comments %>
-        <% comments = @product.comments.sort_by &:created_at%>
-        <% comments.each do |item| %>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="rating" data-rate="<%= item.rate %>"></div>
-                    <%= item.user.first_name + " " + item.user.last_name %>
-                    <span class="pull-right"><%= time_ago_in_words(item.created_at) %></span>
-                    <p><%= trim(item.content, 100) %></p>
-                </div>
-            </div>
-            <hr>
-        <% end %>
-        <script>
-            $(document).ready(function(e){
-                
-            });
-        </script>
+    <% comments = @product.comments.sort_by &:created_at%>
+    <% comments.each do |item| %>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="rating" data-rate="<%= item.rate %>"></div>
+            <%= item.user.first_name + " " + item.user.last_name %>
+            <span class="pull-right"><%= time_ago_in_words(item.created_at) %></span>
+            <p><%= trim(item.content, 100) %></p>
+        </div>
+    </div>
+    <hr>
+    <% end %>
+    <script>
+    $(document).ready(function(e){
+    
+    });
+    </script>
     <% end %>
 </div>
 <script>
-    $(document).ready(function(e){
-        $("#rateYo").rateYo({
-            starWidth: "40px",
-            maxValue: 5,
-            rating: 1,
-            precision: 0,
-            fullStar: true,
-            multiColor: {
-              "startColor": "#FF0000", //RED
-              "endColor"  : "#00FF00"  //GREEN
-            },
-            onChange: function (rating, rateYoInstance) {
-                // $(this).next().text(rating);
-            },
-            onSet: function (rating, rateYoInstance) {
-                $('#hidden-rating').val(rating);
-            }
-        });
-
-        $(".rating").rateYo({
-            starWidth: "15px",
-            maxValue: 5,
-            // rating: 1,
-            precision: 0,
-            fullStar: true,
-            multiColor: {
-              "startColor": "#FF0000", //RED
-              "endColor"  : "#00FF00"  //GREEN
-            },
-            // readOnly: true,
-            onInit: function (rating, rateYoInstance) {
-                var star = $(this).attr('data-rate');
-                rateYoInstance.rating(star);
-            }
-        });
-    });
+$(document).ready(function(e){
+$("#rateYo").rateYo({
+starWidth: "40px",
+maxValue: 5,
+rating: 1,
+precision: 0,
+fullStar: true,
+multiColor: {
+"startColor": "#FF0000", //RED
+"endColor"  : "#00FF00"  //GREEN
+},
+onChange: function (rating, rateYoInstance) {
+// $(this).next().text(rating);
+},
+onSet: function (rating, rateYoInstance) {
+$('#hidden-rating').val(rating);
+}
+});
+$(".rating").rateYo({
+starWidth: "15px",
+maxValue: 5,
+// rating: 1,
+precision: 0,
+fullStar: true,
+multiColor: {
+"startColor": "#FF0000", //RED
+"endColor"  : "#00FF00"  //GREEN
+},
+// readOnly: true,
+onInit: function (rating, rateYoInstance) {
+var star = $(this).attr('data-rate');
+rateYoInstance.rating(star);
+}
+});
+});
 </script>

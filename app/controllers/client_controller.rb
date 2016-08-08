@@ -1,4 +1,5 @@
 class ClientController < ApplicationController
+	include SessionsHelper
 
 	def index
 		# images = Attachment.where('id_item = ? AND object = ?', 20, 'product').order(sort: :asc).first
@@ -75,6 +76,26 @@ class ClientController < ApplicationController
 				# @comment = Comment.new(content: params[:content], product_id:)
 			end
 		end
+	end
+
+	def buynow
+		if request.request_method() == 'POST'
+			session[:cart] ||={}
+	        products = session[:cart][:products]
+
+	        #If exists, add new, else create new variable
+	        if (products && products != {})
+	            session[:cart][:products] << params[:product_id]
+	        else
+	            session[:cart][:products] = Array(params[:product_id])
+	        end
+	        render :json => session[:cart]
+	        return
+		end		
+	end
+
+	def cart
+		@items = cart_contents
 	end
 
 end

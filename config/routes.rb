@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   match '/dang-nhap', to: 'users#signin', via: [:get, :post], as: :signin
   get '/thoat', to: 'users#logout', as: :logout
   post '/post-comment' => 'client#comment', as: :post_comment
+  post '/mua-hang' => 'client#buynow', as: :buynow
+
 
 
 
