@@ -28,17 +28,18 @@ class ApplicationController < ActionController::Base
 	end
 
 
-	helper_method :current_user 
+	helper_method :current_user, :current_client
 
 	def current_user 
 	  @current_user ||= Admin.find(session[:user_id]) if session[:user_id] 
+	end
+
+	def current_client
+		@current_client ||= User.find(session[:client]) if session[:client]
 	end
 
 	def require_user 
 	  redirect_to '/login' unless current_user 
 	end
 
-	def get_thumb (image)
-
-	end
 end

@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   get '/product/:id' => 'client#detail', as: :detail_product
   get '/cate/:id' => 'client#categories', as: :categories
   get '/san-pham' => 'client#products', as: :products
+  match '/dang-ky', to: 'users#signup', via: [:get, :post], as: :signup
+  match '/dang-nhap', to: 'users#signin', via: [:get, :post], as: :signin
+  get '/thoat', to: 'users#logout', as: :logout
+  post '/post-comment' => 'client#comment', as: :post_comment
 
 
 

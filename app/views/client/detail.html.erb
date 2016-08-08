@@ -7,58 +7,107 @@
         <p><%= @product.get_description %></p>
     </div>
     <div class="ratings">
-        <p class="pull-right">3 reviews</p>
+        <p class="pull-right"><%= @product.comments.count %> reviews</p>
         <p>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star-empty"></span>
-            4.0 stars
+            <div class="rating" data-rate="<%= @product.get_rate_average %>"></div>
+            <%= @product.get_rate_average %> stars
         </p>
     </div>
 </div>
 <div class="well">
-    <div class="text-right">
-        <a class="btn btn-success">Leave a Review</a>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star-empty"></span>
-            Anonymous
-            <span class="pull-right">10 days ago</span>
-            <p>This product was great in terms of quality. I would definitely buy another!</p>
+    <div class="row" style="margin: 10px 0px;">
+        <div class="text-right">
+            <% if current_client %>
+                <a id="btn-show-comment" data-url="<%= request.fullpath %>" class="btn btn-success">Leave a Review</a>
+            <% else %>
+                <a href="<%= signin_path() %>" class="btn btn-success">Leave a Review</a>
+            <% end %>
+
         </div>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star-empty"></span>
-            Anonymous
-            <span class="pull-right">12 days ago</span>
-            <p>I've alredy ordered another one!</p>
-        </div>
+    <div class="row" >
+
+        <form method="POST" role="form" data-toggle="validator" class="form-horizontal hide" id="frmComment" action="<%= post_comment_path()%>">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="product_id" value="<%= @product.id %>">
+            <div class="form-group">
+                <label for="input-content" class="col-sm-2 control-label">Noi dung</label>
+                <div class="col-sm-10">
+                    <textarea required class="form-control" name="content" id="input-content" placeholder="Nhap noi dung" cols="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-content" class="col-sm-2 control-label">Danh gia</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="rate" value="1" id="hidden-rating">
+                    <div id="rateYo"></div>
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Post</button>
+                    <button type="button" id="close-form-comment" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </form>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star-empty"></span>
-            Anonymous
-            <span class="pull-right">15 days ago</span>
-            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-        </div>
-    </div>
+    <% if @product.comments %>
+        <% comments = @product.comments.sort_by &:created_at%>
+        <% comments.each do |item| %>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="rating" data-rate="<%= item.rate %>"></div>
+                    <%= item.user.first_name + " " + item.user.last_name %>
+                    <span class="pull-right"><%= time_ago_in_words(item.created_at) %></span>
+                    <p><%= trim(item.content, 100) %></p>
+                </div>
+            </div>
+            <hr>
+        <% end %>
+        <script>
+            $(document).ready(function(e){
+                
+            });
+        </script>
+    <% end %>
 </div>
+<script>
+    $(document).ready(function(e){
+        $("#rateYo").rateYo({
+            starWidth: "40px",
+            maxValue: 5,
+            rating: 1,
+            precision: 0,
+            fullStar: true,
+            multiColor: {
+              "startColor": "#FF0000", //RED
+              "endColor"  : "#00FF00"  //GREEN
+            },
+            onChange: function (rating, rateYoInstance) {
+                // $(this).next().text(rating);
+            },
+            onSet: function (rating, rateYoInstance) {
+                $('#hidden-rating').val(rating);
+            }
+        });
+
+        $(".rating").rateYo({
+            starWidth: "15px",
+            maxValue: 5,
+            // rating: 1,
+            precision: 0,
+            fullStar: true,
+            multiColor: {
+              "startColor": "#FF0000", //RED
+              "endColor"  : "#00FF00"  //GREEN
+            },
+            // readOnly: true,
+            onInit: function (rating, rateYoInstance) {
+                var star = $(this).attr('data-rate');
+                rateYoInstance.rating(star);
+            }
+        });
+    });
+</script>

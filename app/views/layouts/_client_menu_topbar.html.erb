@@ -12,14 +12,35 @@
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	<ul class="nav navbar-nav">
 		<li>
-			<a href="<%= products_path() %>">Products</a>
-		</li>
-		<li>
-			<a href="#">Services</a>
+			<a href="<%= products_path() %>">San pham</a>
 		</li>
 		<li>
 			<a href="#">Contact</a>
 		</li>
 	</ul>
+	<ul class="nav navbar-nav navbar-right">
+		<% if current_client %>
+			<li>
+	        	<a href="<%= signup_path() %>">Register</a>
+	        </li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_client.email %> <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">Profile</a></li>
+	            <li><a href="#">Another action</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href="<%= logout_path() %>">Thoat</a></li>
+	          </ul>
+	        </li>
+		<% else %>
+	        <li>
+	        	<a href="<%= signup_path() %>">Dang ky</a>
+	        </li>
+	        <li>
+	        	<a href="<%= signin_path() %>">Dang nhap</a>
+	        </li>
+        <% end %>
+      </ul>
 </div>
 <!-- /.navbar-collapse -->

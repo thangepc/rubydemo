@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
 	# RelationShip
 	has_many :product_categories
 	has_many :categories, through: :product_categories
+	has_many :comments
 
 	# Validation
 	validates_presence_of :title
@@ -36,5 +37,14 @@ class Product < ActiveRecord::Base
 
 	def get_title(limit)
 		trim(self.title, limit)
+	end
+
+	def get_rate_average
+		total = self.comments.count
+		totalComment = 0
+		self.comments.each { |comment|
+			totalComment += comment.rate
+		}
+		(totalComment/total).round(2)
 	end
 end

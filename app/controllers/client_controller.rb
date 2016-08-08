@@ -64,4 +64,17 @@ class ClientController < ApplicationController
 		# return
 	end
 
+	def comment
+		if request.request_method() == 'POST'
+			if params[:product_id]
+				@product = Product.find(params[:product_id])
+
+				@product.comments.create(content: params[:content], rate: params[:rate], user_id: session[:client])
+				flash[:message_success] = "Add comment is successful"
+				redirect_to detail_product_path(@product)
+				# @comment = Comment.new(content: params[:content], product_id:)
+			end
+		end
+	end
+
 end

@@ -53,8 +53,5 @@ $(document).ready(function() {
 				}
 			});
 		}
-	  /*console.log(this); // DOM element
-	  console.log(event); // jQuery event
-	  console.log(state); // true | false*/
 	});
 });
