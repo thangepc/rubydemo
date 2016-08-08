@@ -1,0 +1,62 @@
+<!-- Projects Row -->
+<div class="row" style="margin: 10px 0px;">
+    <div class="col-sm-10">
+        <form class="form-inline" id="frmSearch">
+            <div class="form-group">
+                <label for="input-type">Tim theo: </label>
+                <select class="form-control" name="type" id="input-type">
+                    <option value="name" <%= params[:type] == "name" ? 'selected="selected"' : '' %> >Ten</option>
+                    <option value="price" <%= params[:type] == "price" ? 'selected="selected"' : '' %> >Gia</option>
+                    <option value="content" <%= params[:type] == "content" ? 'selected="selected"' : '' %> >Noi dung</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="input-keyword">Tu khoa</label>
+                <input type="text" name="keyword" class="form-control" id="input-keyword" placeholder="Tu khoa" value="<%= params[:keyword] %>">
+            </div>
+            <input type="hidden" name="sort" value="title">
+            <input type="hidden" name="order" value="desc">
+            <button type="submit" class="btn btn-default">Tim kiem</button>
+        </form>
+    </div>
+    <div class="col-sm-2">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle glyphicon glyphicon-sort" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Sap xep
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#" class="sort-order" data-sort="created_at" data-order="desc">Thoi gian giam dan</a></li>
+                <li><a href="#" class="sort-order" data-sort="created_at" data-order="asc">Thoi gian tang dan</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" class="sort-order" data-sort="price" data-order="desc">Gia giam dan</a></li>
+                <li><a href="#" class="sort-order" data-sort="price" data-order="asc">Gia tang dan</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <% @products.each do |item| %>
+    <div class="col-md-4 portfolio-item">
+        <a href="<%= detail_product_path(item) %>">
+            <img class="img-responsive" src="<%= item.get_image_default %>" alt="">
+        </a>
+        <h3>
+        <a href="<%= detail_product_path(item) %>"><%= item.get_title(30) %></a>
+        </h3>
+        <p><%= item.get_price %></p>
+        <p><%= item.get_description(50) %></p>
+    </div>
+    <% end %>
+</div>
+<!-- /.row -->
+<hr>
+<!-- Pagination -->
+<div class="row text-center">
+    <div class="col-lg-12">
+        <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+    </div>
+</div>
+<!-- /.row -->

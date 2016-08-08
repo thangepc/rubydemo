@@ -1,15 +1,14 @@
 <!-- Projects Row -->
 <div class="row">
     <% @products.each do |item| %>
-        <% product = item.product %>
         <div class="col-md-4 portfolio-item">
-            <a href="<%= detail_product_path(product) %>">
-                <img class="img-responsive" src="<%= product.get_image_default %>" alt="">
+            <a href="<%= detail_product_path(item) %>">
+                <img class="img-responsive" src="<%= item.get_image_default %>" alt="">
             </a>
             <h3>
-            <a href="#"><%= product.get_title(30) %></a>
+            <a href="<%= detail_product_path(item) %>"><%= item.get_title(30) %></a>
             </h3>
-            <p><%= product.get_description(50) %></p>
+            <p><%= item.get_description(50) %></p>
         </div>
     <% end %>
 </div>
@@ -18,29 +17,7 @@
 <!-- Pagination -->
 <div class="row text-center">
     <div class="col-lg-12">
-        <ul class="pagination">
-            <li>
-                <a href="#">&laquo;</a>
-            </li>
-            <li class="active">
-                <a href="#">1</a>
-            </li>
-            <li>
-                <a href="#">2</a>
-            </li>
-            <li>
-                <a href="#">3</a>
-            </li>
-            <li>
-                <a href="#">4</a>
-            </li>
-            <li>
-                <a href="#">5</a>
-            </li>
-            <li>
-                <a href="#">&raquo;</a>
-            </li>
-        </ul>
+        <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
     </div>
 </div>
 <!-- /.row -->

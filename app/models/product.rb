@@ -24,6 +24,9 @@ class Product < ActiveRecord::Base
 	end
 
 	def get_price
+		if self.price == nil
+			self.price = 0
+		end
 		number_to_currency(self.price, precision: 0, unit: "d")
 	end
 

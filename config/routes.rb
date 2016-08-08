@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get '/' => 'client#index'
   get '/product/:id' => 'client#detail', as: :detail_product
   get '/cate/:id' => 'client#categories', as: :categories
+  get '/san-pham' => 'client#products', as: :products
+
+
 
 
 

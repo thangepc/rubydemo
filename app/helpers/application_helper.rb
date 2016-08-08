@@ -9,7 +9,7 @@ module ApplicationHelper
 	end
 
 	def trim(string = '', length)
-		defaultString = 'String empty'
+		defaultString = '...'
 	    if string == nil || string.empty?
 	      	defaultString
 	    else

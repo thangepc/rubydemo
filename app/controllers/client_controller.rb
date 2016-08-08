@@ -15,8 +15,53 @@ class ClientController < ApplicationController
 	def categories
 		if params[:id] != nil
 			@category = Category.find(params[:id])
-			@productCategory = ProductCategory.where(:category_id => params[:id])
-			@products = @productCategory
+			@productCategory = ProductCategory.where(:category_id => params[:id]).pluck(:product_id)
+			@products = Product.where(id: @productCategory).page(params[:page]).order(:title)
+			# render :json => @products.inspect
+			# return
+
 		end
 	end
+
+	def products
+
+		keyQuery = ''
+		valueQuery = []
+		case params[:type]
+			when "name"
+				keyQuery += "title"
+				if params[:keyword] != nil
+					keyQuery += " LIKE ?"
+					valueQuery.push("%" + params[:keyword] + "%")
+				end
+			when "price"
+				keyQuery += "price"
+				if params[:keyword] != nil
+					keyQuery += " = ?"
+					valueQuery.push(params[:keyword])
+				end
+			when "content"
+				keyQuery += "content"
+				if params[:keyword] != nil
+					keyQuery += " LIKE ?"
+					valueQuery.push("%" + params[:keyword] + "%")
+				end
+			else
+				keyQuery += "title"
+				if params[:keyword] != nil
+					keyQuery += " LIKE ?"
+					valueQuery.push("%" + params[:keyword] + "%")
+				end
+			end
+		
+		orderQuery = 'title ASC'
+		if params[:sort] != nil && params[:order] != nil
+			orderQuery = params[:sort] + " " + params[:order]
+		end
+
+		@products = Product.where(keyQuery, valueQuery).page(params[:page]).order(orderQuery)
+		# render :json => orderQuery.inspect
+		# return
+	end
+
 end
