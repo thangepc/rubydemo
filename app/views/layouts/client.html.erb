@@ -28,6 +28,7 @@
     <!-- Rateyo -->
     <%= javascript_include_tag 'rateyo.v2.1.1/jquery.rateyo.min.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'bootstrap-validator/validator.min.js', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'bootbox/bootbox.min.js', 'data-turbolinks-track' => true %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +36,17 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <meta id="authenticity_token" value="<%= form_authenticity_token %>">
+      <script type="text/javascript">
+        $(document).ready(function(){
+          var authenticity_token = $('#authenticity_token').attr('value');
+          $.ajaxSetup({
+            data: {
+              authenticity_token: authenticity_token,
+            }
+          });
+        });
+      </script>
 </head>
 
 <body>

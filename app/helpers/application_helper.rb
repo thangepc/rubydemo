@@ -1,4 +1,5 @@
 module ApplicationHelper
+	include ActionView::Helpers::NumberHelper
 	def full_title(page_title = '')
 	    base_title = "Ruby on Rails Tutorial Sample App"
 	    if page_title.empty?
@@ -59,7 +60,10 @@ module ApplicationHelper
 		}
   	end
 
-  	def delete_file
-
+  	def convert_number_to_currency(number)
+  		if number == nil
+			number = 0
+		end
+		number_to_currency(number, precision: 0, unit: "d")
   	end
 end

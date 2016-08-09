@@ -45,6 +45,10 @@ class Product < ActiveRecord::Base
 		self.comments.each { |comment|
 			totalComment += comment.rate
 		}
-		(totalComment/total).round(2)
+		total > 0 ? (totalComment/total).round(2) : 0
+	end
+
+	def self.get_amount_cart(quantity, price)
+		quantity * price
 	end
 end

@@ -1,0 +1,71 @@
+<!-- Projects Row -->
+<div class="row">
+    <h2>Booking order</h2>
+    <hr>
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">Thong tin nguoi mua hang</div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="input-first-name" class="col-sm-2 control-label">First name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="input-first-name" placeholder="First name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-last-name" class="col-sm-2 control-label">Last name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="input-last-name" placeholder="Last name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-phone" class="col-sm-2 control-label">Phone</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="input-phone" placeholder="Phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-email" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="input-email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-address" class="col-sm-2 control-label">Address</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="input-address" placeholder="Address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-content" class="col-sm-2 control-label">Content</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="input-content" placeholder="Content" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Xac nhan don hang</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Thong tin don hang</div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">Tong san pham: <b><%= @totalProduct %></b></li>
+                    <li class="list-group-item">Tong gia tri: <b><%= @totalAmount %></b></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+<script>
+$(document).ready(function(){
+});
+</script>

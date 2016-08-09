@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808082816) do
+ActiveRecord::Schema.define(version: 20160809080246) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "first_name",      limit: 255
@@ -32,6 +32,11 @@ ActiveRecord::Schema.define(version: 20160808082816) do
     t.datetime "updated_at",             null: false
     t.integer  "id_item",    limit: 4
     t.integer  "sort",       limit: 4
+  end
+
+  create_table "cart_sessions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -67,8 +72,15 @@ ActiveRecord::Schema.define(version: 20160808082816) do
     t.string   "description",  limit: 255
     t.integer  "quantity",     limit: 4
     t.float    "total",        limit: 24
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "first_name",   limit: 255
+    t.string   "last_name",    limit: 255
+    t.string   "email",        limit: 255
+    t.string   "address",      limit: 255
+    t.string   "phone",        limit: 255
+    t.text     "content",      limit: 65535
+    t.string   "status",       limit: 255
   end
 
   create_table "product_categories", force: :cascade do |t|

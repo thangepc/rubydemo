@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   get '/thoat', to: 'users#logout', as: :logout
   post '/post-comment' => 'client#comment', as: :post_comment
   post '/mua-hang' => 'client#buynow', as: :buynow
+  get '/gio-hang' => 'client#cart', as: :cart
+  post '/cap-nhat-gio-hang' => 'client#update_cart', as: :update_cart
+  post '/xoa-san-pham-gio-hang' => 'client#delete_cart', as: :delete_cart
+  match '/dat-hang', to: 'client#booking', via: [:get, :post], as: :booking
 
 
 
