@@ -1,0 +1,66 @@
+<%= render partial: "partials/message", locals: { account: @buyer } %>
+<h2 class="sub-header"><%= t('orders.heading-list') %></h2>
+<div class="table-responsive" id="list-orders">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Invoice number</th>
+				<th>Quantity</th>
+				<th>Amount</th>
+				<th><%= t('general.lbl-action') %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @orders.each do |item| %>
+			<tr>
+				<td><%= item.id %></td>
+				<td><%= item.invoice_number %></td>
+				<td><%= item.get_quantity %></td>
+				<td><%= item.get_amount %></td>
+				<td>
+					<%
+						color = 'btn-default'
+						case item.status
+						when 'pending'
+						  color = 'btn-danger'
+						when 'shipping'
+						  color = 'btn-warning'
+						when 'recived'
+						  color = 'btn-info'
+						when 'complete'
+						  color = 'btn-success'
+						else
+						  color = 'btn-default'
+						end
+					%>
+					<!-- Split button -->
+					<div class="btn-group">
+						<button type="button" class="btn <%= color %>"><%= item.status.capitalize %></button>
+						<button type="button" class="btn <%= color %> dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="caret"></span>
+						<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" data-id="<%= item.id %>" data-url="<%= change_status_orders_path() %>">
+							<li><a class="change-status-order" href="#" data-status="pending">Pending</a></li>
+							<li><a class="change-status-order" href="#" data-status="shipping">Shipping</a></li>
+							<li><a class="change-status-order" href="#" data-status="recived">Recived</a></li>
+							<li><a class="change-status-order" href="#" data-status="complete">Complete</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a class="change-status-order" href="#" data-status="cancel">Cancel</a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+			<% end %>
+			
+		</tbody>
+		<tfoot>
+		<tr>
+			<td colspan="4">
+				<%= will_paginate @orders %>
+			</td>
+		</tr>
+		</tfoot>
+	</table>
+</div>

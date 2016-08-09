@@ -5,7 +5,10 @@
 	<li class="<%= @active == 'products' ? 'active' : '' %>">
 		<%= link_to t('products.menu'), controller: "products" %>
 	</li>
-	<li><a href="#">Analytics</a></li>
+	<li class="<%= @active == 'orders' ? 'active' : '' %>">
+		<%= link_to t('orders.menu'), controller: "orders" %>
+	</li>
+	<li><a href="#">Orders</a></li>
 	<li><a href="#">Export</a></li>
 </ul>
 <ul class="nav nav-sidebar">

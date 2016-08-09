@@ -18,7 +18,7 @@
 				<td><%= item.id %></td>
 				<td><%= item.email %></td>
 				<td><%= item.first_name + ' ' + item.last_name %></td>
-				<td><input type="checkbox" name="my-checkbox" data-id="<%= item.id %>" data-url="/admins/change_status" <%= item.status == 1 ? 'checked' : '' %> ></td>
+				<td><input type="checkbox" name="my-checkbox" data-id="<%= item.id %>" data-url="<%= change_status_admins_path() %>" <%= item.status == 1 ? 'checked' : '' %> ></td>
 				<td>
 					<%= link_to t('general.btn-edit'), edit_admins_path(item), class: "btn btn-success" %>
 					<%= link_to t('general.btn-delete'), delete_admins_path(item), method: :delete,

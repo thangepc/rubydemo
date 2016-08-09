@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 		    	redirect_to controller: 'admins', action: 'dashboard'
 		  	else
 		  		flash[:message_error] = t('login.lbl-message-login-faild')
-		    	redirect_to '/login'
+		    	redirect_to login_path()
 		  	end 
 		end
 	end
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 	def logout
 		session[:user_id] = nil
 		flash[:message_success] = t('logout.lbl-message-logout-success')
-		redirect_to '/login'
+		redirect_to login_path()
 	end
 
 end

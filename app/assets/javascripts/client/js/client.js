@@ -74,26 +74,32 @@ $(document).ready(function(){
     $('body').on('click', '.delete-cart', function (e) {
         e.preventDefault();
         var item = $(this);
-        var productId = item.attr('data-product-id');
-        var url = item.attr('data-url');
-        var totalAmount = $(this).attr('data-update-total-amount');
-        if (typeof productId !== 'undefined' && typeof url !== 'undefined') {
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: {product_id: productId},
-                success: function(result) {
-                    if (result.status == 1) {
-                        item.parents('tr').remove();
-                        $(totalAmount).html(result.total_amount);
-                        if (result.total_product == 0) {
-                            $('#list-cart tbody tr').remove();
-                            $('#list-cart tfoot').remove();
-                            $('#list-cart tbody').append('<tr><td colspan="7">Khong co san pham nao trong gio hang</td></tr>');
+        bootbox.confirm("Ban co chac chan muon xoa san pham nay?", function(result) {
+            if (result) {
+                var productId = item.attr('data-product-id');
+                var url = item.attr('data-url');
+                var totalAmount = item.attr('data-update-total-amount');
+                if (typeof productId !== 'undefined' && typeof url !== 'undefined') {
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {product_id: productId},
+                        success: function(result) {
+                            if (result.status == 1) {
+                                item.parents('tr').remove();
+                                $(totalAmount).html(result.total_amount);
+                                $('#label-header-cart').text(result.total_product);
+                                if (result.total_product == 0) {
+                                    $('#list-cart tbody tr').remove();
+                                    $('#list-cart tfoot').remove();
+                                    $('#list-cart tbody').append('<tr><td colspan="7">Khong co san pham nao trong gio hang</td></tr>');
+                                }
+                            }
                         }
-                    }
+                    });
                 }
-            });
-        }
+                
+            }
+        });
     });
 });

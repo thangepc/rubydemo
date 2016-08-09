@@ -1,4 +1,5 @@
 class Order < ActiveRecord::Base
+	include ActionView::Helpers::NumberHelper, ApplicationHelper
 	require 'securerandom'
 	has_many :order_details
 
@@ -13,6 +14,12 @@ class Order < ActiveRecord::Base
 	validates_length_of :phone ,{:minimum => 2, :maximum => 255}
 	validates_length_of :address ,{:minimum => 2, :maximum => 255}
 
+	def get_amount
+		number_to_currency(self.total, precision: 0, unit: "d")
+	end
+	def get_quantity
+		self.quantity
+	end
 
 	# Callback
 	def before_save
@@ -32,4 +39,6 @@ class Order < ActiveRecord::Base
 		self.invoice_number = SecureRandom.hex
 		self.status = 'pending'
 	end
+
+
 end

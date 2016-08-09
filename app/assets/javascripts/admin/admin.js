@@ -54,4 +54,24 @@ $(document).ready(function() {
 			});
 		}
 	});
+
+	$('body').on('click', '.change-status-order', function(e) {
+		e.preventDefault();
+		var item = $(this);
+		var status = item.attr('data-status');
+		var url = item.parents('ul').attr('data-url');
+		var id = item.parents('ul').attr('data-id');
+		if (typeof status !== 'undefined' && typeof url !== 'undefined' && typeof id !== 'undefined') {
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: {id: id, status: status},
+				success: function(result) {
+					if (result.status == 1) {
+						
+					}
+				}
+			})
+		}
+	})
 });

@@ -46,6 +46,13 @@ vi:
     heading-list: "Danh sach san pham"
     heading-add-new: "Them moi san pham"
     heading-update: "Cap nhat san pham"
+
+  orders:
+    menu: "Don hang"
+    heading-list: "Danh sach don hang"
+    heading-add-new: "Them moi don hang"
+    heading-update: "Cap nhat don hang"
+
   admin:
     menu: "Quan ly tai khoan admin"
     heading-list: "Danh sach tai khoan Admin"

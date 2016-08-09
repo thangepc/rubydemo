@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
 					upload_files(params[:files], @product, 'product')
 				end
 		     	flash[:message_success] = t('general.lbl-add-new-success')
-				redirect_to '/products'
+				redirect_to index_product_path()
 			else
 				flash[:message_error] = t('general.lbl-add-new-dont-success')
 		     end
@@ -62,7 +62,7 @@ class ProductsController < ApplicationController
 					upload_files(params[:files], @product, 'product')
 				end
 				flash[:message_success] = t('general.lbl-update-success')
-				redirect_to '/products'
+				redirect_to index_product_path()
 			else
 				flash[:message_error] = t('general.lbl-update-dont-success')
 			end	

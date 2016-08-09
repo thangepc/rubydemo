@@ -55,54 +55,6 @@
 <hr>
 <script>
     $(document).ready(function(){
-        $('body').on('keyup', '.cart-quantity', function(e) {
-            // e.defaultPrevented();
-            var quantity = $(this).val();
-            quantity = parseInt(quantity) || 1;
-            var productId = $(this).attr('data-product-id');
-            var url = $(this).attr('data-url');
-            var amountItem = $(this).attr('data-update-amount');
-            var totalAmount = $(this).attr('data-update-total-amount');
-                console.log(productId);
-            if(typeof quantity !== 'undefined' && typeof productId !== 'undefined' && typeof url !== 'undefined') {
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: {quantity: quantity, product_id: productId},
-                    success: function(result) {
-                        if (result.status == 1) {
-                            $(amountItem).html(result.item_amount);
-                            $(totalAmount).html(result.total_amount);
-                        }
-                    }
-                })
-            }
-        });
-
-        $('body').on('click', '.delete-cart', function (e) {
-            e.preventDefault();
-            var item = $(this);
-            var productId = item.attr('data-product-id');
-            var url = item.attr('data-url');
-            var totalAmount = $(this).attr('data-update-total-amount');
-            if (typeof productId !== 'undefined' && typeof url !== 'undefined') {
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: {product_id: productId},
-                    success: function(result) {
-                        if (result.status == 1) {
-                            item.parents('tr').remove();
-                            $(totalAmount).html(result.total_amount);
-                            if (result.total_product == 0) {
-                                $('#list-cart tbody tr').remove();
-                                $('#list-cart tfoot').remove();
-                                $('#list-cart tbody').append('<tr><td colspan="7">Khong co san pham nao trong gio hang</td></tr>');
-                            }
-                        }
-                    }
-                });
-            }
-        });
+        
     });
 </script>

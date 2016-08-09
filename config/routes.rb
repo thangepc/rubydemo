@@ -20,32 +20,35 @@ Rails.application.routes.draw do
 
 
 
-
-  get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
+  get '/admin/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
 
   # Category
-  get '/categories' => 'categories#index'
-  match '/categories/create', to: 'categories#create', via: [:get, :post], as: :create_category
-  match '/categories/:id', to: 'categories#edit', via: [:get, :patch], as: :edit_category
-  post '/categories/:id' => 'categories#delete', as: :delete_category
+    get '/admin/categories' => 'categories#index', as: :index_category
+  match '/admin/categories/create', to: 'categories#create', via: [:get, :post], as: :create_category
+  match '/admin/categories/:id', to: 'categories#edit', via: [:get, :patch], as: :edit_category
+  post '/admin/categories/:id' => 'categories#delete', as: :delete_category
 
   # Products
-  get '/products' => 'products#index'
-  match '/products/create', to: 'products#create', via: [:get, :post], as: :create_product
-  match '/products/:id', to: 'products#edit', via: [:get, :patch], as: :edit_product
-  post '/products/:id' => 'products#delete', as: :delete_product
+  get '/admin/products' => 'products#index', as: :index_product
+  match '/admin/products/create', to: 'products#create', via: [:get, :post], as: :create_product
+  match '/admin/products/:id', to: 'products#edit', via: [:get, :patch], as: :edit_product
+  post '/admin/products/:id' => 'products#delete', as: :delete_product
 
   # Admin
-  get '/signup' => 'admins#signup'
+  get '/admin/signup' => 'admins#signup', as: :register
   # resources :admins
-  match '/login' => 'sessions#login', via: [:get, :post], as: :login
-  get '/logout' => 'sessions#logout'
-  match '/dashboard' => 'admins#dashboard', via: [:get, :post], as: :dashboard
-  get '/admins' => 'admins#index'
+  match '/admin/login' => 'sessions#login', via: [:get, :post], as: :login
+  get '/admin/logout' => 'sessions#logout', as: :signout
+  match '/admin/dashboard' => 'admins#dashboard', via: [:get, :post], as: :dashboard
+  get '/admins' => 'admins#index', as: :admin_manager
   post '/admins/change_status', to: 'admins#change_status', as: :change_status_admins
   match '/admins/create', to: 'admins#create', via: [:get, :post], as: :create_admins
   match '/admins/:id', to: 'admins#edit', via: [:get, :patch], as: :edit_admins
   post '/admins/:id', to: 'admins#delete', as: :delete_admins
+
+  # Order Admin
+  get '/admin/orders' => 'orders#index', as: :orders
+  post '/admin/chang-status-order' => 'orders#change_status', as: :change_status_orders
 
 
 

@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
 					upload_files(params[:files], @category, 'category')
 				end
 		     	flash[:message_success] = t('general.lbl-add-new-success')
-				redirect_to '/categories'
+				redirect_to index_category_path()
 			else
 				flash[:message_error] = t('general.lbl-add-new-dont-success')
 		    end
@@ -39,7 +39,7 @@ class CategoriesController < ApplicationController
 					upload_files(params[:files], @category, 'category')
 				end
 				flash[:message_success] = t('general.lbl-update-success')
-				redirect_to '/categories'
+				redirect_to index_category_path()
 			else
 				flash[:message_error] = t('general.lbl-update-dont-success')
 			end	
