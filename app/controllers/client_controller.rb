@@ -180,13 +180,59 @@ class ClientController < ApplicationController
 	end
 
 	def booking
+		# render :json => session[:cart]
+		# return
 		@totalProduct = session[:cart]["products"].count || 0
 		@totalAmount = convert_number_to_currency(calculator_total_cart)
 
 		if request.request_method() == 'POST'
-
+			if session[:cart]["products"] == nil
+				flash[:message_error] = "Gio hang khong co san pham nao"
+				redirect_to '/'
+			else
+				@order = Order.new(order_params)
+				infoOrder = get_total_quantity_and_amount
+				@order.quantity = infoOrder[:quantity]
+				@order.total = infoOrder[:amount]
+				if @order.save
+					orderDetail = []
+					session[:cart]["products"].each_with_index do |value, index|
+						product = Product.find(value)
+						if product
+							orderDetail << {product_id: value, quantity: session[:cart]["quantity"][index], price: product.price}
+						end
+					end
+					if !orderDetail.empty?
+						@order.order_details.create(orderDetail)
+						session[:cart] = nil
+				     	flash[:message_success] = 'Tao don hang thanh cong'
+				     	flash[:message_booking] = "Don hang cua ban da duoc tao va se duoc nhan vien cua chung toi xu ly trong thoi gian som nhat. Xin chan trong cam on."
+						redirect_to '/thong-tin-dat-hang'
+					else
+						flash[:message_error] = 'Don hang khong co san pham nao'
+						redirect_to '/'
+					end
+				else
+					flash[:message_error] = 'Tao don hang gap loi'
+			    end
+			end
+		else
+			@order = Order.new
 		end
 	end
+
+	def booking_info
+		if flash[:message_booking] != nil
+			@message = flash[:message_booking]
+		else
+			redirect_to '/'
+		end
+	end
+
+	private
+	  def order_params
+	    params.require(:order).permit(:first_name, :last_name, :email, :address, :content, :phone)
+	  end
 
 
 end

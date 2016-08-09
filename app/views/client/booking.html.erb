@@ -6,49 +6,91 @@
         <div class="panel panel-default">
             <div class="panel-heading">Thong tin nguoi mua hang</div>
             <div class="panel-body">
-                <form class="form-horizontal">
+                <%= form_for @order, url: {action: "booking"}, html: {class: ""} do |item|  %>
                     <div class="form-group">
-                        <label for="input-first-name" class="col-sm-2 control-label">First name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-first-name" placeholder="First name">
+                        <%= item.label :first_name, for: "input-first-name", class: "control-label" %>
+                        <div class="">
+                            <%= item.text_field :first_name, class: "form-control", id: "input-first-name", placeholder: "First name" %>
+                            <% if @order.errors.include?(:first_name)%>
+                            <ul>
+                                <% @order.errors.full_messages_for(:first_name).each do |err| %>
+                                    <li><span id="helpBlock" class="text-danger"><%= err %></span></li>
+                                <% end %>
+                            </ul>
+                        <% end %>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-last-name" class="col-sm-2 control-label">Last name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-last-name" placeholder="Last name">
+                        <%= item.label :last_name, for: "input-last-name", class: "control-label" %>
+                        <div class="">
+                            <%= item.text_field :last_name, class: "form-control", id: "input-last-name", placeholder: "Last name" %>
+                            <% if @order.errors.include?(:last_name)%>
+                                <ul>
+                                    <% @order.errors.full_messages_for(:last_name).each do |err| %>
+                                        <li><span id="helpBlock" class="text-danger"><%= err %></span></li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-phone" class="col-sm-2 control-label">Phone</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-phone" placeholder="Phone">
+                        <%= item.label :phone, for: "input-phone", class: "control-label" %>
+                        <div class="">
+                            <%= item.text_field :phone, class: "form-control", id: "input-phone", placeholder: "Phone" %>
+                            <% if @order.errors.include?(:phone)%>
+                                <ul>
+                                    <% @order.errors.full_messages_for(:phone).each do |err| %>
+                                        <li><span id="helpBlock" class="text-danger"><%= err %></span></li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-email" class="col-sm-2 control-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="input-email" placeholder="Email">
+                        <%= item.label :email, for: "input-email", class: "control-label" %>
+                        <div class="">
+                            <%= item.email_field :email, class: "form-control", id: "input-email", placeholder: "Email" %>
+                            <% if @order.errors.include?(:email)%>
+                                <ul>
+                                    <% @order.errors.full_messages_for(:email).each do |err| %>
+                                        <li><span id="helpBlock" class="text-danger"><%= err %></span></li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-address" class="col-sm-2 control-label">Address</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-address" placeholder="Address">
+                        <%= item.label :address, for: "input-address", class: "control-label" %>
+                        <div class="">
+                            <%= item.text_field :address, class: "form-control", id: "input-address", placeholder: "Address" %>
+                            <% if @order.errors.include?(:address)%>
+                                <ul>
+                                    <% @order.errors.full_messages_for(:address).each do |err| %>
+                                        <li><span id="helpBlock" class="text-danger"><%= err %></span></li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-content" class="col-sm-2 control-label">Content</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="input-content" placeholder="Content" rows="10"></textarea>
+                        <%= item.label :content, for: "input-content", class: "control-label" %>
+                        <div class="">
+                            <%= item.text_area :content, class: "form-control", rows: "8", id: "input-content", placeholder: "Content" %>
+                            <% if @order.errors.include?(:content)%>
+                                <ul>
+                                    <% @order.errors.full_messages_for(:content).each do |err| %>
+                                        <li><span id="helpBlock" class="text-danger"><%= err %></span></li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Xac nhan don hang</button>
+                        <div class="">
+                            <button type="submit" class="btn btn-success pull-right">Xac nhan don hang</button>
                         </div>
                     </div>
-                </form>
+                <% end %>
             </div>
         </div>
     </div>
@@ -65,7 +107,3 @@
     </div>
 </div>
 <!-- /.row -->
-<script>
-$(document).ready(function(){
-});
-</script>

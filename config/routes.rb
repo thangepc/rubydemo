@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post '/cap-nhat-gio-hang' => 'client#update_cart', as: :update_cart
   post '/xoa-san-pham-gio-hang' => 'client#delete_cart', as: :delete_cart
   match '/dat-hang', to: 'client#booking', via: [:get, :post], as: :booking
+  get '/thong-tin-dat-hang', to: 'client#booking_info', as: :booking_info
 
 
 

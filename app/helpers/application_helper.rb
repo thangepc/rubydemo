@@ -66,4 +66,28 @@ module ApplicationHelper
 		end
 		number_to_currency(number, precision: 0, unit: "d")
   	end
+
+  	def get_total_quantity_and_amount
+  		totalQuantity = 0
+		totalAmount = 0
+		if session[:cart]["products"] != nil
+			session[:cart]["products"].each_with_index do |value, index|
+				product = Product.find(value)
+				if !product.nil?
+					totalQuantity += session[:cart]["quantity"][index].to_i
+					totalAmount += session[:cart]["quantity"][index].to_i * product.price
+				end
+			end
+		end
+		return {quantity: totalQuantity, amount: totalAmount}
+  	end
+
+  	def get_total_cart
+  		totalItems = 0
+  		if session[:cart] != nil
+  			totalItems = session[:cart]["products"].count
+  		end
+  		totalItems
+  	end
 end
+

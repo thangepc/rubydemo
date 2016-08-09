@@ -67,7 +67,7 @@ $(document).ready(function(){
                         $(totalAmount).html(result.total_amount);
                     }
                 }
-            })
+            });
         }
     });
 

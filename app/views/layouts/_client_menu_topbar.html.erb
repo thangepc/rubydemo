@@ -15,7 +15,7 @@
 			<a href="<%= products_path() %>">San pham</a>
 		</li>
 		<li>
-			<a href="<%= cart_path() %>">(<%= session[:cart]["products"].count %> items) in Shopping cart</a>
+			<a href="<%= cart_path() %>">(<%= get_total_cart %> items) in Shopping cart</a>
 		</li>
 	</ul>
 	<ul class="nav navbar-nav navbar-right">
