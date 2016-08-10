@@ -40,5 +40,41 @@ class Order < ActiveRecord::Base
 		self.status = 'pending'
 	end
 
+	def get_button_status
+		color = 'btn-default'
+		case self.status
+		when 'pending'
+		  color = 'btn-danger'
+		when 'shipping'
+		  color = 'btn-warning'
+		when 'recived'
+		  color = 'btn-info'
+		when 'complete'
+		  color = 'btn-success'
+		else
+		  color = 'btn-default'
+		end
+		color
+	end
+
+	def self.get_list_button_status
+		listButtonStatus = ['btn-default', 'btn-danger', 'btn-warning', 'btn-info', 'btn-success']
+	end
+
+	def get_list_status
+		listStatus = ['pending', 'shipping', 'recived', 'complete', 'cancel']
+	end
+
+	def get_button_html
+		html = ""
+		get_list_status.each do |item|
+			text = item.capitalize
+			itemList = "<li><a class='change-status-order' href='#'' data-status='#{item}''>#{text}</a></li>"
+			html += itemList
+		end
+		html
+	end
+
+
 
 end

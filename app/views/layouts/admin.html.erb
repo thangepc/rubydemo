@@ -14,9 +14,13 @@
 
   <!-- Bootstrap switch -->
   <%= stylesheet_link_tag    'bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css', media: 'all', 'data-turbolinks-track' => true %>
+  <!-- Datepicker -->
+  <%= stylesheet_link_tag    'datepicker/css/datepicker.css', media: 'all', 'data-turbolinks-track' => true %>
 
   <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'bootstrap/js/bootstrap.min.js', 'data-turbolinks-track' => true %>
+  <!-- Notification -->
+  <%= javascript_include_tag 'bootstrap-notify-3.1.3/dist/bootstrap-notify.min.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'bootstrap/js/holder.min.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'bootstrap/js/ie10-viewport-bug-workaround.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'kartik-v-bootstrap-fileinput/js/plugins/canvas-to-blob.min.js', 'data-turbolinks-track' => true %>
@@ -31,6 +35,12 @@
   <!-- Bootstrap switch -->
   <%= javascript_include_tag 'bootstrap-switch/js/bootstrap-switch.min.js', 'data-turbolinks-track' => true %>
 
+  <!-- Bootbox  -->
+  <%= javascript_include_tag 'bootbox/bootbox.min.js', 'data-turbolinks-track' => true %>
+  
+  <!-- Datepicker -->
+  <%= javascript_include_tag 'datepicker/js/bootstrap-datepicker.js', 'data-turbolinks-track' => true %>
+  
   
   <%= csrf_meta_tags %>
   <meta id="authenticity_token" value="<%= form_authenticity_token %>">
@@ -44,9 +54,16 @@
       });
     });
   </script>
+
 </head>
 <body>
-
+    <%if flash[:message_success] %>
+        <div class="hide" id="message-notification" data-type="success" data-title="Success"><%= flash[:message_success] %></div>
+    <% end %>
+    <%if flash[:message_error] %>
+        <div class="hide" id="message-notification" data-type="danger" data-title="Warning"><%= flash[:message_error] %></div>
+    <% end %>
+    <div class="hide" id="message-notification-js" data-type="danger" data-title="Warning">Message</div>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -117,7 +134,7 @@
         </div>
       </div>
     </div>
-    
+    <%= javascript_include_tag 'library/main.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'admin/admin.js', 'data-turbolinks-track' => true %>
   </body>
 </html>

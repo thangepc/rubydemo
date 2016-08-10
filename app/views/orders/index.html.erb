@@ -1,5 +1,18 @@
 <%= render partial: "partials/message", locals: { account: @buyer } %>
 <h2 class="sub-header"><%= t('orders.heading-list') %></h2>
+<div class="row" style="margin: 10px 0px;">
+	<form class="form-inline">
+		<div class="form-group">
+			<label for="input-product-name">Product</label>
+			<input type="text" class="form-control" id="input-product-name" placeholder="Product name">
+		</div>
+		<div class="form-group">
+			<label for="input-created-date">Created date</label>
+			<input type="text" class="form-control datepicker" id="input-created-date" placeholder="Created date">
+		</div>
+		<button type="submit" class="btn btn-default">Search</button>
+	</form>
+</div>
 <div class="table-responsive" id="list-orders">
 	<table class="table table-striped">
 		<thead>
@@ -19,35 +32,15 @@
 				<td><%= item.get_quantity %></td>
 				<td><%= item.get_amount %></td>
 				<td>
-					<%
-						color = 'btn-default'
-						case item.status
-						when 'pending'
-						  color = 'btn-danger'
-						when 'shipping'
-						  color = 'btn-warning'
-						when 'recived'
-						  color = 'btn-info'
-						when 'complete'
-						  color = 'btn-success'
-						else
-						  color = 'btn-default'
-						end
-					%>
 					<!-- Split button -->
 					<div class="btn-group">
-						<button type="button" class="btn <%= color %>"><%= item.status.capitalize %></button>
-						<button type="button" class="btn <%= color %> dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button type="button" class="btn <%= item.get_button_status %>" id="item-button-status-<%= item.id %>"><%= item.status.capitalize %></button>
+						<button type="button" class="btn <%= item.get_button_status %> dropdown-toggle" id="item-button-status-toggle-<%= item.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<span class="caret"></span>
 						<span class="sr-only">Toggle Dropdown</span>
 						</button>
 						<ul class="dropdown-menu" data-id="<%= item.id %>" data-url="<%= change_status_orders_path() %>">
-							<li><a class="change-status-order" href="#" data-status="pending">Pending</a></li>
-							<li><a class="change-status-order" href="#" data-status="shipping">Shipping</a></li>
-							<li><a class="change-status-order" href="#" data-status="recived">Recived</a></li>
-							<li><a class="change-status-order" href="#" data-status="complete">Complete</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a class="change-status-order" href="#" data-status="cancel">Cancel</a></li>
+							<%= raw item.get_button_html %>
 						</ul>
 					</div>
 				</td>
