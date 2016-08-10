@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   # Client
-  get '/' => 'client#index'
+  get '/' => 'client#index', as: :index
   get '/product/:id' => 'client#detail', as: :detail_product
   get '/cate/:id' => 'client#categories', as: :categories
   get '/san-pham' => 'client#products', as: :products
@@ -60,6 +60,11 @@ Rails.application.routes.draw do
   match '/delete_file' => 'settings#delete_file', via: [:get, :post], as: :delete_file
   match '/files_sort' => 'settings#files_sort', via: [:get, :post], as: :files_sort
 
+
+  # Login Facebook
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signouts'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

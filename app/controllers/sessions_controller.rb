@@ -19,4 +19,17 @@ class SessionsController < ApplicationController
 		redirect_to login_path()
 	end
 
+	def create
+		# render :json => env["omniauth.auth"]
+		# return
+    user = User.from_omniauth(env["omniauth.auth"])
+    session[:client] = user.id
+    redirect_to index_path()
+  end
+
+  def destroy
+    session[:client] = nil
+    redirect_to index_path()
+  end
+
 end
