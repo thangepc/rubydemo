@@ -1,8 +1,26 @@
 class OrdersController < ApplicationController
+	require 'date'
 	layout "admin"
+	before_action :require_user, only: [:index, :change_status]
 	def index
 		@active = 'orders'
-		@orders = Order.all.page(params[:page]).order(:created_at)
+ 		# render :json => DateTime.parse(date).strftime("%Y-%m-%d")
+ 		# return
+		@orders = Order.joins(order_details: :product)
+		if params[:name] != nil
+			keyword = 'products.title LIKE ?'
+			@orders = @orders.where(keyword, "%" + params[:name] + "%")
+
+		end
+		if params[:date] != nil
+			date = params[:date]
+			date = DateTime.parse(date).strftime("%Y-%m-%d")
+			@orders = @orders.where('orders.created_at LIKE ?', "%" + date + "%")
+		end
+		@orders = @orders.page(params[:page]).order(:created_at)
+		# render :json => @orders
+		# return
+		# @orders = Order.all.page(params[:page]).order(:created_at)
 	end
 
 	def change_status

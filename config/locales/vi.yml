@@ -53,6 +53,12 @@ vi:
     heading-add-new: "Them moi don hang"
     heading-update: "Cap nhat don hang"
 
+  users:
+    menu: "Nguoi dung"
+    heading-list: "Danh sach nguoi dung"
+    heading-add-new: "Them moi nguoi dung"
+    heading-update: "Cap nhat nguoi dung"
+
   admin:
     menu: "Quan ly tai khoan admin"
     heading-list: "Danh sach tai khoan Admin"

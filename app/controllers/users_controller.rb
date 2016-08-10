@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :require_user, only: [:index]
 	def signup
 		if request.request_method() == 'POST'
 			@user = User.new(user_params)
@@ -32,6 +33,31 @@ class UsersController < ApplicationController
 		session[:client] = nil
 		flash[:message_success] = t('logout.lbl-message-logout-success')
 		redirect_to '/dang-nhap'
+	end
+
+
+	def index
+		@active = 'users'
+		if params[:email] != nil
+			@users = User.where('email LIKE ?', "%" + params[:email] + "%").page(params[:page]).order(:email)
+		else
+			@users = User.all.page(params[:page]).order(:email)
+		end
+		render layout: "admin"
+	end
+
+	def change_status
+		responce = {status: 0, message: "Update status isn't successful."}
+		if params[:id] && params[:status]
+			id = params[:id]
+			status = params[:status]
+			user = User.find(id)
+			user.status = status
+			if user.save
+				responce = {status: 1, message: 'Update status is successful.'}
+			end
+		end
+		render :json => responce
 	end
 
 

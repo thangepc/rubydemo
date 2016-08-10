@@ -1,16 +1,16 @@
 <%= render partial: "partials/message", locals: { account: @buyer } %>
 <h2 class="sub-header"><%= t('orders.heading-list') %></h2>
 <div class="row" style="margin: 10px 0px;">
-	<form class="form-inline">
+	<form class="form-inline" method="GET" action="<%= orders_path() %>">
 		<div class="form-group">
 			<label for="input-product-name">Product</label>
-			<input type="text" class="form-control" id="input-product-name" placeholder="Product name">
+			<input type="text" class="form-control" id="input-product-name" name="name" value="<%= params[:name] %>" placeholder="Product name">
 		</div>
 		<div class="form-group">
 			<label for="input-created-date">Created date</label>
-			<input type="text" class="form-control datepicker" id="input-created-date" placeholder="Created date">
+			<input type="text" class="form-control datepicker" id="input-created-date" name="date" value="<%= params[:date] %>" placeholder="Created date">
 		</div>
-		<button type="submit" class="btn btn-default">Search</button>
+		<button type="submit" class="btn btn-success">Search</button>
 	</form>
 </div>
 <div class="table-responsive" id="list-orders">

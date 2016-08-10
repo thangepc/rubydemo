@@ -1,0 +1,41 @@
+<%= render partial: "partials/message", locals: { account: @buyer } %>
+<h2 class="sub-header"><%= t('users.heading-list') %></h2>
+<div class="row" style="margin: 10px 0px;">
+	<form class="form-inline" method="GET" action="<%= users_path() %>">
+		<div class="form-group">
+			<label for="input-email">Email</label>
+			<input type="text" class="form-control" id="input-email" name="email" value="<%= params[:email] %>" placeholder="Email">
+		</div>
+		<button type="submit" class="btn btn-success">Search</button>
+	</form>
+</div>
+<div class="table-responsive" id="list-users">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Email</th>
+				<th>Full name</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @users.each do |item| %>
+			<tr>
+				<td><%= item.id %></td>
+				<td><%= item.email %></td>
+				<td><%= item.first_name + ' ' + item.last_name %></td>
+				<td><input type="checkbox" name="my-checkbox" data-id="<%= item.id %>" data-url="<%= change_status_users_path() %>" <%= item.status == 1 ? 'checked' : '' %> ></td>
+			</tr>
+			<% end %>
+			
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4">
+					<%= will_paginate @users %>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

@@ -50,6 +50,9 @@ Rails.application.routes.draw do
   get '/admin/orders' => 'orders#index', as: :orders
   post '/admin/chang-status-order' => 'orders#change_status', as: :change_status_orders
 
+  #Users
+  get '/admin/users' => 'users#index', as: :users
+  post '/admin/users/change_status', to: 'users#change_status', as: :change_status_users
 
 
   # Upload file
