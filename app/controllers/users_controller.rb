@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 	def signin
 	  	if request.request_method() == 'POST'
 			@user = User.find_by_email(params[:session][:email])
-		  	if @user && @user.authenticate(params[:session][:password])
+		  	if User.authenticate(params[:session][:email], params[:session][:password])
 		    	session[:client] = @user.id
 		    	redirect_to '/'
 		  	else
