@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
 	validates_length_of :address ,{:minimum => 2, :maximum => 255}
 
 	def get_amount
-		number_to_currency(self.total, precision: 0, unit: "d")
+		number_to_currency(self.total, precision: 0, locale: I18n.locale)
 	end
 	def get_quantity
 		self.quantity

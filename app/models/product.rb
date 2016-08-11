@@ -15,6 +15,12 @@ class Product < ActiveRecord::Base
 	# Pagination
 	self.per_page = 15
 
+	after_find do |product|
+		if product.price.nil?
+			product.price = 0
+		end
+	end
+
 	def get_image_default
 		image = Attachment.where('id_item = ? AND object = ?', self.id, 'product').order(sort: :asc).first
 		if image != nil
@@ -28,7 +34,7 @@ class Product < ActiveRecord::Base
 		if self.price == nil
 			self.price = 0
 		end
-		number_to_currency(self.price, precision: 0, unit: "d")
+		number_to_currency(self.price, precision: 0, locale: I18n.locale)
 	end
 
 	def get_description(limit = nil)

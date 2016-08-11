@@ -21,6 +21,14 @@
 
 vi:
   hello: "Xin chao"
+  number:
+    currency:
+      format:
+        unit: 'VND'
+        delimiter: '.'
+        separator: ','
+        precision: 2
+        format: '%n %u'
   general:
     btn-add-new: "Them moi" 
     btn-delete: "Xoa"

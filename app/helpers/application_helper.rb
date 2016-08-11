@@ -64,7 +64,7 @@ module ApplicationHelper
   		if number == nil
 			number = 0
 		end
-		number_to_currency(number, precision: 0, unit: "d")
+		number_to_currency(number, precision: 0, locale: I18n.locale)
   	end
 
   	def get_total_quantity_and_amount

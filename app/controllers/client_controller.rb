@@ -106,18 +106,18 @@ class ClientController < ApplicationController
 	end
 
 	def cart
-		# render :json => session[:cart]
-		# return
-		# session[:cart]["products"].delete_at(0)
-		# session[:cart]["quantity"].delete_at(0)
-		cart = session[:cart]
-		productId = cart["products"]
-		@quantity = cart["quantity"]
-		@products ||= []
-		if productId != nil
-			productId.each_with_index do |id, index|
-				product = Product.find(id)
-				@products << product
+		if session[:cart] == nil
+			redirect_to index_path
+		else
+			cart = session[:cart]
+			productId = cart["products"]
+			@quantity = cart["quantity"]
+			@products ||= []
+			if productId != nil
+				productId.each_with_index do |id, index|
+					product = Product.find(id)
+					@products << product
+				end
 			end
 		end
 	end
