@@ -22,17 +22,64 @@
 en:
   hello: "Hello world"
   general:
-    btn-add-new: "Add new"
+    btn-add-new: "Add new" 
     btn-delete: "Delete"
     btn-edit: "Edit"
     btn-update: "Update"
+    btn-cancel: "Cancel"
+    lbl-action: "Action"
+    lbl-confirm-delete: "Are you want to delete this item?"
+    lbl-delete-success: "Delete is successful."
+    lbl-delete-dont-success: "Delete isn't successful"
+    lbl-add-new-success: "Add new is successful"
+    lbl-add-new-dont-success: "Add new isn't successful"
+    lbl-update-success: "Update is successful"
+    lbl-update-dont-success: "Update isn't successful"
   categories:
-    heading-list: "List Categories"
+    menu: "Categories"
+    heading-list: "List categories"
     heading-add-new: "Add new category"
     heading-update: "Update category"
     
+  products:
+    menu: "Products"
+    heading-list: "List product"
+    heading-add-new: "Add new product"
+    heading-update: "Update product"
+
+  orders:
+    menu: "Orders"
+    heading-list: "List orders"
+    heading-add-new: "Add new order"
+    heading-update: "Update order"
+
+  users:
+    menu: "Users"
+    heading-list: "List users"
+    heading-add-new: "Add new user"
+    heading-update: "Update user"
+
+  admin:
+    menu: "Admin account"
+    heading-list: "List Admin account"
+    heading-add-new: "Add new account admin"
+    heading-update: "Update account admin"
+  login:
+    heading: "Please Login"
+    lbl-email-address: "Email address"
+    lbl-password: "Password"
+    lbl-remember: "Remember me"
+    btn-signin: "Login"
+    lbl-message-login-faild: "Email or password invalid"
+  logout:
+    lbl-message-logout-success: "Logout is successful"
+
   languages:
-    lang: "Language"
-    vi: "VietNammese"
+    lang: "Languages"
+    vi: "Vietnamese"
     en: "English"
+
+  will_paginate:
+    previous_label: "<span aria-hidden='true'>&laquo;</span>"
+    next_label: "<span aria-hidden='true'>&raquo;</span>"
 
