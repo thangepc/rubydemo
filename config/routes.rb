@@ -4,17 +4,17 @@ Rails.application.routes.draw do
   get '/' => 'client#index', as: :index
   get '/product/:id' => 'client#detail', as: :detail_product
   get '/cate/:id' => 'client#categories', as: :categories
-  get '/san-pham' => 'client#products', as: :products
-  match '/dang-ky', to: 'users#signup', via: [:get, :post], as: :signup
-  match '/dang-nhap', to: 'users#signin', via: [:get, :post], as: :signin
-  get '/thoat', to: 'users#logout', as: :logout
+  get '/products' => 'client#products', as: :products
+  match '/register', to: 'users#signup', via: [:get, :post], as: :signup
+  match '/signin', to: 'users#signin', via: [:get, :post], as: :signin
+  get '/logout', to: 'users#logout', as: :logout
   post '/post-comment' => 'client#comment', as: :post_comment
-  post '/mua-hang' => 'client#buynow', as: :buynow
-  get '/gio-hang' => 'client#cart', as: :cart
-  post '/cap-nhat-gio-hang' => 'client#update_cart', as: :update_cart
-  post '/xoa-san-pham-gio-hang' => 'client#delete_cart', as: :delete_cart
-  match '/dat-hang', to: 'client#booking', via: [:get, :post], as: :booking
-  get '/thong-tin-dat-hang', to: 'client#booking_info', as: :booking_info
+  post '/buy-now' => 'client#buynow', as: :buynow
+  get '/cart' => 'client#cart', as: :cart
+  post '/update-cart' => 'client#update_cart', as: :update_cart
+  post '/delete-product-cart' => 'client#delete_cart', as: :delete_cart
+  match '/booking', to: 'client#booking', via: [:get, :post], as: :booking
+  get '/booking-info', to: 'client#booking_info', as: :booking_info
 
 
 

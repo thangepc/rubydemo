@@ -188,7 +188,7 @@ class ClientController < ApplicationController
 		if request.request_method() == 'POST'
 			if session[:cart]["products"] == nil
 				flash[:message_error] = "Gio hang khong co san pham nao"
-				redirect_to '/'
+				redirect_to index_path()
 			else
 				@order = Order.new(order_params)
 				infoOrder = get_total_quantity_and_amount
@@ -207,10 +207,10 @@ class ClientController < ApplicationController
 						session[:cart] = nil
 				     	flash[:message_success] = 'Tao don hang thanh cong'
 				     	flash[:message_booking] = "Don hang cua ban da duoc tao va se duoc nhan vien cua chung toi xu ly trong thoi gian som nhat. Xin chan trong cam on."
-						redirect_to '/thong-tin-dat-hang'
+						redirect_to booking_info_path()
 					else
 						flash[:message_error] = 'Don hang khong co san pham nao'
-						redirect_to '/'
+						redirect_to index_path()
 					end
 				else
 					flash[:message_error] = 'Tao don hang gap loi'
@@ -225,7 +225,7 @@ class ClientController < ApplicationController
 		if flash[:message_booking] != nil
 			@message = flash[:message_booking]
 		else
-			redirect_to '/'
+			redirect_to index_path()
 		end
 	end
 

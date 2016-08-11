@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 			@user = User.new(user_params)
 		     if @user.save
 		     	flash[:message_success] = t('general.lbl-add-new-success')
-				redirect_to '/dang-nhap'
+				redirect_to signin_path()
 			else
 				flash[:message_error] = t('general.lbl-add-new-dont-success')
 		    end
@@ -21,10 +21,10 @@ class UsersController < ApplicationController
 			@user = User.find_by_email(params[:session][:email])
 		  	if User.authenticate(params[:session][:email], params[:session][:password])
 		    	session[:client] = @user.id
-		    	redirect_to '/'
+		    	redirect_to index_path()
 		  	else
 		  		flash[:message_error] = t('login.lbl-message-login-faild')
-		    	redirect_to '/dang-nhap'
+		    	redirect_to signin_path()
 		  	end 
 		end
 	end
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 	def logout
 		session[:client] = nil
 		flash[:message_success] = t('logout.lbl-message-logout-success')
-		redirect_to '/dang-nhap'
+		redirect_to signin_path()
 	end
 
 
