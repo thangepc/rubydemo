@@ -41,10 +41,9 @@
 				<%= item.label :password, class: "sr-only", for: "input-password" %>
 				<%= item.password_field :password, class: "form-control", id: "input-password", placeholder: t('login.lbl-password'), required: true %>
 				<div class="checkbox">
-					<label>
-						<input type="checkbox" value="remember-me"> <%= t('login.lbl-remember') %>
-					</label>
-					<%= link_to 'Facebook', '/auth/facebook' %>
+					<a href='/auth/facebook' class="btn btn-block btn-social btn-facebook">
+						<span class="fa fa-facebook"></span> Sign in with Facebook
+					</a>
 				</div>
 				<%= item.submit t('login.btn-signin'), class: "btn btn-lg btn-primary btn-block" %>
 			<% end %>
